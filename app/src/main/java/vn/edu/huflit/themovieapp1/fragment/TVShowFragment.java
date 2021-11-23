@@ -43,7 +43,7 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         TVItem tv = list.get(0);
         trendingSingleImage = mView.findViewById(R.id.TrendingSingleImage);
         trendingSingleTitle = mView.findViewById(R.id.TrendingSingleTitle);
-        ImageAPI.getCorner(tv.poster_path, 4, trendingSingleImage);
+        ImageAPI.getCorner(tv.backdrop_path, 5, trendingSingleImage);
         trendingSingleTitle.setText(tv.name);
     }
     public void renderPopularTVSecondComponent(){
@@ -51,7 +51,7 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         TVItem tv = list.get(10);
         secondSingleImage = mView.findViewById(R.id.SecondSingleImage);
         secondSingleTitle = mView.findViewById(R.id.SecondSingleTitle);
-        ImageAPI.getCorner(tv.poster_path, 4, secondSingleImage);
+        ImageAPI.getCorner(tv.backdrop_path, 5, secondSingleImage);
         secondSingleTitle.setText(tv.name);
     }
     public void renderPopularTVThirdComponent(){
@@ -59,7 +59,7 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         TVItem tv = list.get(20);
         thirdSingleImage = mView.findViewById(R.id.ThirdSingleImage);
         thirdSingleTitle = mView.findViewById(R.id.ThirdSingleTitle);
-        ImageAPI.getCorner(tv.poster_path, 4, thirdSingleImage);
+        ImageAPI.getCorner(tv.backdrop_path, 5, thirdSingleImage);
         thirdSingleTitle.setText(tv.name + " is happening");
     }
 

@@ -48,7 +48,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         MovieItem movie = list.get(0);
         trendingSingleImage = mView.findViewById(R.id.TrendingSingleImage);
         trendingSingleTitle = mView.findViewById(R.id.TrendingSingleTitle);
-        ImageAPI.getCorner(movie.poster_path, 4, trendingSingleImage);
+        ImageAPI.getCorner(movie.backdrop_path, 5, trendingSingleImage);
         trendingSingleTitle.setText(movie.title);
     }
     public void renderTrendingMovie() {
