@@ -77,7 +77,6 @@ public class MainActivity extends AppCompatActivity {
                     case 3:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_account).setChecked(true);
                         break;
-
                     case 4:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_more).setChecked(true);
                         break;
