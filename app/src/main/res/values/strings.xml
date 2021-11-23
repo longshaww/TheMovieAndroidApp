@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">TheMovieApp1</string>
+    <string name="title_home">Movie</string>
+    <string name="title_tv">TV</string>
+    <string name="title_search">Search</string>
+    <string name="title_account">Account</string>
+    <string name="title_more">More</string>
+</resources>
