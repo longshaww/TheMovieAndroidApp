@@ -1,13 +1,11 @@
 package vn.edu.huflit.themovieapp1;
 
-import android.graphics.Movie;
-import android.util.Log;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +15,13 @@ import java.util.List;
 public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> {
     private List<MovieItem> list;
     private Listener listener;
+    private Context context;
+
+    public MovieAdapter(Context context, List<MovieItem> list, MovieAdapter.Listener listener) {
+        this.context = context;
+        this.list = list;
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -27,13 +32,17 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        MovieItem movieList = list.get(position);
+        MovieItem movieItem = list.get(position);
 //        holder.textPopularMovie.setText(movieList.title);
-        ImageAPI.getCorner(movieList.poster_path, 3, holder.MovieImage);
+        ImageAPI.getCorner(movieItem.poster_path, 3, holder.MovieImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(movieList);
+                listener.onClick(movieItem);
+                Intent intent = new Intent(context, DetailsActivity.class);
+                intent.putExtra("id", movieItem.id);
+                intent.putExtra("media_type", movieItem.media_type);
+                context.startActivity(intent);
             }
         });
     }
@@ -54,13 +63,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         }
     }
 
-    public MovieAdapter(List<MovieItem> list, MovieAdapter.Listener listener) {
-        this.list = list;
-        this.listener = listener;
-    }
 
     public interface Listener {
         void onClick(MovieItem item);
     }
 }
-

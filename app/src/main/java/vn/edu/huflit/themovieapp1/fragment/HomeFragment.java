@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -21,8 +22,8 @@ import vn.edu.huflit.themovieapp1.MovieAPI;
 import vn.edu.huflit.themovieapp1.MovieAdapter;
 import vn.edu.huflit.themovieapp1.MovieItem;
 import vn.edu.huflit.themovieapp1.R;
-import vn.edu.huflit.themovieapp1.TVItem;
 import vn.edu.huflit.themovieapp1.TrendingMovieAdapter;
+
 
 public class HomeFragment extends Fragment implements TrendingMovieAdapter.Listener, MovieAdapter.Listener {
     private View mView;
@@ -62,7 +63,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
     public void renderPopularMovie(){
         List<MovieItem> listMovie = api.getPopularMovie();
         RecyclerView listMovieView = mView.findViewById(R.id.PopularTV);
-        MovieAdapter movieAdapter = new MovieAdapter(listMovie, this);
+        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
@@ -71,7 +72,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
     public void renderTopRatedMovie(){
         List<MovieItem> listMovie = api.getTopRatedMovie();
         RecyclerView listMovieView = mView.findViewById(R.id.TopRatedMovie);
-        MovieAdapter movieAdapter = new MovieAdapter(listMovie, this);
+        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
@@ -79,11 +80,12 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
 
     @Override
     public void onClick(Entertainment item) {
-
+        Toast.makeText(getContext(), item.id, Toast.LENGTH_SHORT).show();
     }
 
     @Override
     public void onClick(MovieItem item) {
-
+        Toast.makeText(getContext(), item.title, Toast.LENGTH_SHORT).show();
     }
+
 }

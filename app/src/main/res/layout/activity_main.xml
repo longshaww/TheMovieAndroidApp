@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".MainActivity"
-    android:background="#191A19"
+    android:background="#212121"
     >
 
     <androidx.viewpager2.widget.ViewPager2
@@ -28,7 +28,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation"
-        android:background="?android:attr/windowBackground"
+        android:background="#3a3a3a"
         android:layout_alignParentBottom="true"
         />
 </RelativeLayout>
