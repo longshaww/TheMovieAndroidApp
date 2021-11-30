@@ -3,19 +3,8 @@ package vn.edu.huflit.themovieapp1;
 
 import static java.lang.Thread.sleep;
 
-import android.graphics.Bitmap;
-import android.graphics.BitmapShader;
-import android.graphics.Canvas;
 import android.graphics.Movie;
-import android.graphics.Paint;
-import android.graphics.RectF;
-import android.graphics.Shader;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.os.Parcel;
-import android.os.Parcelable;
-import android.view.View;
-import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -25,9 +14,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.reflect.TypeToken;
-import com.squareup.picasso.Picasso;
-import com.squareup.picasso.Target;
-import com.squareup.picasso.Transformation;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -391,7 +377,7 @@ public class MovieAPI {
      * @return List of <i>TVItem</i>
      */
     public List<TVItem> getTopRatedTV() {
-        String response = requestServer("/movie/top_rated", "page=" + top_rated_tv.nextPage);
+        String response = requestServer("/tv/top_rated", "page=" + top_rated_tv.nextPage);
 
         if (response == null) return null;
 

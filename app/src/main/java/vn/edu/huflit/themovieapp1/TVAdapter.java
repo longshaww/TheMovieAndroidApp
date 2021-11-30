@@ -1,5 +1,7 @@
 package vn.edu.huflit.themovieapp1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +12,18 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import vn.edu.huflit.themovieapp1.fragment.TVShowFragment;
+
 public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
     private List<TVItem> list;
     private TVAdapter.Listener listener;
+    private Context context;
+
+    public TVAdapter(Context context, List<TVItem> list, TVAdapter.Listener listener) {
+        this.context = context;
+        this.list = list;
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -30,6 +41,10 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
             @Override
             public void onClick(View v) {
                 listener.onClick(tvList);
+                Intent intent = new Intent(context, DetailsTVActivity.class);
+                intent.putExtra("id", tvList.id);
+                intent.putExtra("media_type", tvList.media_type);
+                context.startActivity(intent);
             }
         });
     }
@@ -48,11 +63,6 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
             TVImage = itemView.findViewById(R.id.trendingImage);
 //            textPopularMovie = itemView.findViewById(R.id.textTrending);
         }
-    }
-
-    public TVAdapter(List<TVItem> list, TVAdapter.Listener listener) {
-        this.list = list;
-        this.listener = listener;
     }
 
     public interface Listener {
