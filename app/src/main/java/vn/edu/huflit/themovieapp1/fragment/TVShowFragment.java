@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -43,7 +44,7 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         TVItem tv = list.get(0);
         trendingSingleImage = mView.findViewById(R.id.TrendingSingleImage);
         trendingSingleTitle = mView.findViewById(R.id.TrendingSingleTitle);
-        ImageAPI.getCorner(tv.backdrop_path, 5, trendingSingleImage);
+        ImageAPI.get(tv.backdrop_path, 5, trendingSingleImage);
         trendingSingleTitle.setText(tv.name);
     }
     public void renderPopularTVSecondComponent(){
@@ -60,13 +61,13 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         thirdSingleImage = mView.findViewById(R.id.ThirdSingleImage);
         thirdSingleTitle = mView.findViewById(R.id.ThirdSingleTitle);
         ImageAPI.getCorner(tv.backdrop_path, 5, thirdSingleImage);
-        thirdSingleTitle.setText(tv.name + " is happening");
+        thirdSingleTitle.setText(tv.name);
     }
 
     public void renderPopularTV(){
         List<TVItem> listTV = api.getPopularTV();
         RecyclerView listTVView = mView.findViewById(R.id.PopularTV);
-        TVAdapter tvAdapter = new TVAdapter(listTV, this);
+        TVAdapter tvAdapter = new TVAdapter(getContext(), listTV, this);
         LinearLayoutManager layoutTV = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listTVView.setLayoutManager(layoutTV);
         listTVView.setAdapter(tvAdapter);
@@ -74,7 +75,7 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
     public void renderTopRatedTV(){
         List<TVItem> listTV = api.getTopRatedTV();
         RecyclerView listTVView = mView.findViewById(R.id.TopRatedTV);
-        TVAdapter tvAdapter = new TVAdapter(listTV, this);
+        TVAdapter tvAdapter = new TVAdapter(getContext(), listTV, this);
         LinearLayoutManager layoutTV = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listTVView.setLayoutManager(layoutTV);
         listTVView.setAdapter(tvAdapter);
@@ -82,6 +83,6 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
 
     @Override
     public void onClick(TVItem item) {
-
+        Toast.makeText(getContext(), item.id, Toast.LENGTH_SHORT).show();
     }
 }

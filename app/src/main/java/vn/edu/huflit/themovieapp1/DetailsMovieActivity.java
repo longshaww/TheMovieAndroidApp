@@ -12,7 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import java.io.Serializable;
 
-public class DetailsActivity extends AppCompatActivity implements Serializable{
+public class DetailsMovieActivity extends AppCompatActivity implements Serializable{
     private static final String TAG ="SomeActivity";
     private TextView txtTitle,txtOverview,txtPopularity,txtVoteAverage,txtVoteCount;
     private ImageView imageView;
@@ -28,7 +28,7 @@ public class DetailsActivity extends AppCompatActivity implements Serializable{
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.details);
+        setContentView(R.layout.activity_detail);
         Log.d(TAG, "onCreate: started");
         getIncomingIntent();
     }
@@ -54,36 +54,33 @@ public class DetailsActivity extends AppCompatActivity implements Serializable{
 //            vote_average: double;
 //            vote_count: int;
 
-            MovieDetail movie = api.getDetailMovie(id);
-            String title = movie.title;
-            String image = movie.backdrop_path;
-            String overview = movie.overview;
-            Double popularity = movie.popularity;
-            Double vote_average = movie.vote_average;
-            Integer vote_count = movie.vote_count;
-            setIncomingIntent(title,image,overview,popularity,vote_average,vote_count);
+            MovieDetail movieDetail = api.getDetailMovie(id);
+            String title = movieDetail.title;
+            String imageBg = movieDetail.backdrop_path;
+            String image = movieDetail.poster_path;
+            String overview = movieDetail.overview;
+            Double popularity = movieDetail.popularity;
+            Double vote_average = movieDetail.vote_average;
+            Integer vote_count = movieDetail.vote_count;
+            setIncomingIntent(title, imageBg, image,overview,popularity,vote_average,vote_count);
         }
     }
 
-    private void setIncomingIntent(String title,String image,String overview,Double popularity,Double vote_average,Integer vote_count){
-        txtTitle = findViewById(R.id.DetailTitle);
+    private void setIncomingIntent(String title, String imageBg, String image,String overview,Double popularity,Double vote_average,Integer vote_count){
+        imageView = findViewById(R.id.imgBackroundDetail);
+        ImageAPI.getCorner(imageBg, 5, imageView);
+
+        imageView = findViewById(R.id.imgDetail);
+        ImageAPI.getCorner(image, 5, imageView);
+
+        txtTitle = findViewById(R.id.txtTitleDetail);
         txtTitle.setText(title);
 
-//        txtOverview,txtPopularity,txtVoteAverage,txtVoteCount
-        txtOverview = findViewById(R.id.DetailOverview);
-        txtOverview.setText(overview);
-
-        imageView = findViewById(R.id.DetailImage);
-        ImageAPI.getCorner(image,5,imageView);
-
-        txtPopularity = findViewById(R.id.DetailPopularity);
-        txtPopularity.setText(popularity.toString());
-
-        txtVoteAverage = findViewById(R.id.DetailVoteAverage);
-        txtVoteAverage.setText(vote_average.toString());
-
-        txtVoteCount = findViewById(R.id.DetailVoteCount);
+        txtVoteCount = findViewById(R.id.txtVoteCountDetail);
         txtVoteCount.setText(vote_count.toString());
+
+        txtOverview = findViewById(R.id.txtOverviewDetail);
+        txtOverview.setText(overview);
 
     }
 }

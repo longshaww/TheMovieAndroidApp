@@ -49,7 +49,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         MovieItem movie = list.get(0);
         trendingSingleImage = mView.findViewById(R.id.TrendingSingleImage);
         trendingSingleTitle = mView.findViewById(R.id.TrendingSingleTitle);
-        ImageAPI.getCorner(movie.backdrop_path, 5, trendingSingleImage);
+        ImageAPI.get(movie.backdrop_path, 5, trendingSingleImage);
         trendingSingleTitle.setText(movie.title);
     }
     public void renderTrendingMovie() {
@@ -85,7 +85,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
 
     @Override
     public void onClick(MovieItem item) {
-        Toast.makeText(getContext(), item.title, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getContext(), item.id, Toast.LENGTH_SHORT).show();
     }
 
 }
