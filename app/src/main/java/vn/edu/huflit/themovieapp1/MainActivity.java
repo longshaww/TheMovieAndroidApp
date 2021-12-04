@@ -12,6 +12,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import androidx.appcompat.widget.Toolbar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -49,12 +50,8 @@ public class MainActivity extends AppCompatActivity {
                     viewPager2.setCurrentItem(0);
                 } else if (id == R.id.navigation_tvshow) {
                     viewPager2.setCurrentItem(1);
-                } else if (id == R.id.navigation_search) {
-                    viewPager2.setCurrentItem(2);
                 } else if (id == R.id.navigation_account) {
-                    viewPager2.setCurrentItem(3);
-                } else if (id == R.id.navigation_more) {
-                    viewPager2.setCurrentItem(4);
+                    viewPager2.setCurrentItem(2);
                 }
                 return true;
             }
@@ -63,22 +60,15 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                switch(position){
+                switch (position) {
                     case 0:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_home).setChecked(true);
                         break;
                     case 1:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_tvshow).setChecked(true);
                         break;
-                    case 2:
-                        bottomNavigationView.getMenu().findItem(R.id.navigation_search).setChecked(true);
-                        break;
-
                     case 3:
                         bottomNavigationView.getMenu().findItem(R.id.navigation_account).setChecked(true);
-                        break;
-                    case 4:
-                        bottomNavigationView.getMenu().findItem(R.id.navigation_more).setChecked(true);
                         break;
                 }
             }

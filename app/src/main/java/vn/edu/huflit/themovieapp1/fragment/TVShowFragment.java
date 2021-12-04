@@ -35,7 +35,7 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         renderPopularTV();
         renderTopRatedTV();
         renderPopularTVFirstComponent();
-        renderPopularTVSecondComponent();
+//        renderPopularTVSecondComponent();
         renderPopularTVThirdComponent();
         return mView;
     }
@@ -44,17 +44,17 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         TVItem tv = list.get(0);
         trendingSingleImage = mView.findViewById(R.id.TrendingSingleImage);
         trendingSingleTitle = mView.findViewById(R.id.TrendingSingleTitle);
-        ImageAPI.get(tv.backdrop_path, 5, trendingSingleImage);
+        ImageAPI.getCorner(tv.backdrop_path, 5, trendingSingleImage);
         trendingSingleTitle.setText(tv.name);
     }
-    public void renderPopularTVSecondComponent(){
-        List<TVItem> list = api.getPopularTV();
-        TVItem tv = list.get(10);
-        secondSingleImage = mView.findViewById(R.id.SecondSingleImage);
-        secondSingleTitle = mView.findViewById(R.id.SecondSingleTitle);
-        ImageAPI.getCorner(tv.backdrop_path, 5, secondSingleImage);
-        secondSingleTitle.setText(tv.name);
-    }
+//    public void renderPopularTVSecondComponent(){
+//        List<TVItem> list = api.getPopularTV();
+//        TVItem tv = list.get(10);
+//        secondSingleImage = mView.findViewById(R.id.SecondSingleImage);
+//        secondSingleTitle = mView.findViewById(R.id.SecondSingleTitle);
+//        ImageAPI.getCorner(tv.backdrop_path, 5, secondSingleImage);
+//        secondSingleTitle.setText(tv.name);
+//    }
     public void renderPopularTVThirdComponent(){
         List<TVItem> list = api.getPopularTV();
         TVItem tv = list.get(20);

@@ -17,13 +17,6 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
     private TextView txtTitle,txtOverview,txtPopularity,txtVoteAverage,txtVoteCount;
     private ImageView imageView;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
-    private String title;
-    private String image;
-    private String overview;
-    private Double popularity;
-    private Double vote_average;
-    private Integer vote_count;
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -37,36 +30,21 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         if (getIntent().hasExtra("id") && getIntent().hasExtra("media_type")) {
             String id = getIntent().getStringExtra("id");
             String media_type = getIntent().getStringExtra("media_type");
-//            APIKey api = (APIKey) getIntent().getSerializableExtra("APIKey");
-//            backdrop_path: String;
-//            genres: Genres[];
-//            homepage: String;
-//            id: int;
-//            original_language: String;
-//            overview: String;
-//            popularity: double;
-//            poster_path: String;
-//            production_companies: Company[];
-//            production_countries: Country[];
-//            spoken_languages: Language[];
-//            status: String;
-//            tagline: String;
-//            vote_average: double;
-//            vote_count: int;
 
             MovieDetail movieDetail = api.getDetailMovie(id);
-            String title = movieDetail.title;
             String imageBg = movieDetail.backdrop_path;
             String image = movieDetail.poster_path;
-            String overview = movieDetail.overview;
+            String name = movieDetail.title;
             Double popularity = movieDetail.popularity;
             Double vote_average = movieDetail.vote_average;
             Integer vote_count = movieDetail.vote_count;
-            setIncomingIntent(title, imageBg, image,overview,popularity,vote_average,vote_count);
+            String overview = movieDetail.overview;
+
+            setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, overview);
         }
     }
 
-    private void setIncomingIntent(String title, String imageBg, String image,String overview,Double popularity,Double vote_average,Integer vote_count){
+    private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count,  String overview) {
         imageView = findViewById(R.id.imgBackroundDetail);
         ImageAPI.getCorner(imageBg, 5, imageView);
 
@@ -74,9 +52,16 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         ImageAPI.getCorner(image, 5, imageView);
 
         txtTitle = findViewById(R.id.txtTitleDetail);
-        txtTitle.setText(title);
+        txtTitle.setText(name);
 
-        txtVoteCount = findViewById(R.id.txtVoteCountDetail);
+        txtPopularity = findViewById(R.id.txtNumPopularity);
+        txtPopularity.setText(popularity.toString());
+
+
+        txtVoteAverage = findViewById(R.id.txtNumVoteAverage);
+        txtVoteAverage.setText(vote_average.toString());
+
+        txtVoteCount = findViewById(R.id.txtNumVoteCount);
         txtVoteCount.setText(vote_count.toString());
 
         txtOverview = findViewById(R.id.txtOverviewDetail);

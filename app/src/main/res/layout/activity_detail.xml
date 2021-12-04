@@ -8,30 +8,28 @@
     android:fillViewport="true"
     tools:layout_editor_absoluteX="0dp"
     tools:layout_editor_absoluteY="0dp"
-
     >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#212121">
+        android:background="#f8f8ff">
 
         <ImageView
             android:id="@+id/imgBackroundDetail"
-            android:layout_width="match_parent"
-            android:layout_height="260dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_width="0dp"
+            android:layout_height="232dp"
+            android:alpha="0.7"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.0"
-            android:alpha="0.4"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/imgDetail"
-            android:layout_width="150dp"
-            android:layout_height="240dp"
-            android:layout_marginLeft="18dp"
-            android:layout_marginTop="110dp"
+            android:layout_width="168dp"
+            android:layout_height="248dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="130dp"
             app:layout_constraintStart_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -40,8 +38,11 @@
             android:id="@+id/txtTitleDetail"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginTop="10dp"
             android:fontFamily="sans-serif-black"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="22dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/imgDetail"
@@ -49,74 +50,128 @@
 
         <TextView
             android:id="@+id/txtPopularity"
-            android:layout_width="60dp"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:layout_marginTop="16dp"
+            android:text="Popularity: "
+            android:textColor="#000000"
             android:textSize="14dp"
             app:layout_constraintStart_toStartOf="@+id/txtTitleDetail"
             app:layout_constraintTop_toBottomOf="@+id/txtTitleDetail" />
 
         <TextView
-            android:id="@+id/txtVoteCountDetail"
-            android:layout_width="60dp"
+            android:id="@+id/txtNumPopularity"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="14dp"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/txtPopularity"
+            app:layout_constraintTop_toTopOf="@+id/txtPopularity" />
+
+        <TextView
+            android:id="@+id/txtVoteAverage"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:drawableStart="@drawable/ic_baseline_star_24"
+            android:textSize="14dp"
+            app:layout_constraintStart_toStartOf="@+id/imgDetail"
             app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
 
         <TextView
-            android:id="@+id/text123"
-            android:layout_width="60dp"
+            android:id="@+id/txtNumVoteAverage"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:layout_marginStart="2dp"
+            android:textColor="#000000"
+            android:textSize="14dp"
+            app:layout_constraintStart_toEndOf="@+id/txtVoteAverage"
+            app:layout_constraintTop_toTopOf="@+id/txtVoteAverage" />
+
+        <TextView
+            android:id="@+id/txtVoteCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="2dp"
+            android:drawableStart="@drawable/ic_baseline_bookmarks_24"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/txtNumVoteCount"
+            app:layout_constraintTop_toTopOf="@+id/txtNumVoteCount" />
+
+        <TextView
+            android:id="@+id/txtNumVoteCount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:textColor="#000000"
             android:textSize="14dp"
             app:layout_constraintEnd_toEndOf="@+id/imgDetail"
             app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
 
         <TextView
-            android:id="@+id/txt1454"
-            android:layout_width="60dp"
+            android:id="@+id/txtSession"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:textColor="#FFFFFF"
+            android:layout_marginTop="12dp"
+            android:text="Session: "
+            android:textColor="#000000"
             android:textSize="14dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtVoteCountDetail" />
+            app:layout_constraintStart_toStartOf="@+id/txtVoteAverage"
+            app:layout_constraintTop_toBottomOf="@+id/txtVoteAverage" />
 
         <TextView
-            android:id="@+id/txt6789"
-            android:layout_width="60dp"
+            android:id="@+id/txtNumSession"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:textColor="#FFFFFF"
+            android:textColor="#000000"
             android:textSize="14dp"
-            app:layout_constraintEnd_toEndOf="@+id/imgDetail"
-            app:layout_constraintTop_toBottomOf="@+id/text123" />
+            app:layout_constraintStart_toEndOf="@+id/txtSession"
+            app:layout_constraintTop_toTopOf="@+id/txtSession" />
 
         <TextView
+            android:id="@+id/txtEpisodes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="Episodes: "
+            android:textColor="#000000"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toStartOf="@+id/txtNumEpisodes"
+            app:layout_constraintTop_toTopOf="@+id/txtNumEpisodes" />
+
+        <TextView
+            android:id="@+id/txtNumEpisodes"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:textColor="#000000"
+            android:textSize="14dp"
+            app:layout_constraintEnd_toEndOf="@+id/txtNumVoteCount"
+            app:layout_constraintTop_toBottomOf="@+id/txtNumVoteCount" />
+
+        <TextView
+            android:id="@+id/txtTitleOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/txtTitleOverview"
-            android:layout_marginStart="18dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:textColor="#FFFFFF"
-            android:textSize="18dp"
             android:text="Overview"
+            android:textColor="#000000"
+            android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txt1454"/>
+            app:layout_constraintTop_toBottomOf="@+id/txtSession" />
 
 
         <TextView
             android:id="@+id/txtOverviewDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="18dp"
-            android:layout_marginRight="18dp"
-            android:layout_marginTop="16dp"
-            android:textColor="#FFFFFF"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="16dp"
+            android:paddingBottom="16dp"
+            android:textColor="#000000"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTitleOverview" />

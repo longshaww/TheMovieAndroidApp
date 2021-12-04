@@ -1,7 +1,11 @@
 package vn.edu.huflit.themovieapp1.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -22,6 +26,7 @@ import vn.edu.huflit.themovieapp1.MovieAPI;
 import vn.edu.huflit.themovieapp1.MovieAdapter;
 import vn.edu.huflit.themovieapp1.MovieItem;
 import vn.edu.huflit.themovieapp1.R;
+import vn.edu.huflit.themovieapp1.SearchActivity;
 import vn.edu.huflit.themovieapp1.TrendingMovieAdapter;
 
 
@@ -30,6 +35,12 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
     private ImageView trendingSingleImage;
     private TextView trendingSingleTitle;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
 
     @Nullable
     @Override
@@ -49,13 +60,13 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         MovieItem movie = list.get(0);
         trendingSingleImage = mView.findViewById(R.id.TrendingSingleImage);
         trendingSingleTitle = mView.findViewById(R.id.TrendingSingleTitle);
-        ImageAPI.get(movie.backdrop_path, 5, trendingSingleImage);
+        ImageAPI.getCorner(movie.backdrop_path, 5, trendingSingleImage);
         trendingSingleTitle.setText(movie.title);
     }
     public void renderTrendingMovie() {
         List<Entertainment> list = api.getTrending();
         RecyclerView listView = mView.findViewById(R.id.TrendingList);
-        TrendingMovieAdapter adapter = new TrendingMovieAdapter(list, this);
+        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getContext(), list, this);
         LinearLayoutManager layout = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listView.setLayoutManager(layout);
         listView.setAdapter(adapter);
@@ -76,6 +87,21 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuSearch) {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

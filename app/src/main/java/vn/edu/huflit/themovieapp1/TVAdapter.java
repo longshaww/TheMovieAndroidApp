@@ -6,6 +6,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,7 +36,7 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull TVAdapter.ViewHolder holder, int position) {
         TVItem tvList = list.get(position);
-//        holder.textPopularMovie.setText(movieList.title);
+       holder.textPopularMovie.setText(tvList.name);
         ImageAPI.getCorner(tvList.poster_path, 3, holder.TVImage);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,12 +57,12 @@ public class TVAdapter extends RecyclerView.Adapter<TVAdapter.ViewHolder> {
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView TVImage;
-//        private TextView textPopularMovie;
+        private TextView textPopularMovie;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             TVImage = itemView.findViewById(R.id.trendingImage);
-//            textPopularMovie = itemView.findViewById(R.id.textTrending);
+            textPopularMovie = itemView.findViewById(R.id.txtTitleItem);
         }
     }
 

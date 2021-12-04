@@ -1,5 +1,7 @@
 package vn.edu.huflit.themovieapp1;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,14 @@ import java.util.List;
 public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdapter.ViewHolder> {
     private List<Entertainment> list;
     private Listener listener;
+    private Context context;
+
+    public TrendingMovieAdapter(Context context, List<Entertainment> list, Listener listener) {
+        this.list = list;
+        this.listener = listener;
+        this.context = context;
+    }
+
 
     @NonNull
     @Override
@@ -27,18 +37,31 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Entertainment entertainment = list.get(position);
-//        if (entertainment.media_type.equals("movie")) {
-//            MovieItem movie = (MovieItem) entertainment;
-//            holder.textTrending.setText(movie.title);
-//        } else {
-//            TVItem tv = (TVItem) entertainment;
-//            holder.textTrending.setText(tv.name);
-//        }
+        if (entertainment.media_type.equals("movie")) {
+            MovieItem movie = (MovieItem) entertainment;
+            holder.txtTitleItem.setText(movie.title);
+        } else {
+            TVItem tv = (TVItem) entertainment;
+            holder.txtTitleItem.setText(tv.name);
+        }
         ImageAPI.getCorner(entertainment.poster_path, 3, holder.trending);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onClick(entertainment);
+                if (entertainment.media_type.equals("movie")) {
+                    MovieItem movie = (MovieItem) entertainment;
+                    Intent intent = new Intent(context, DetailsMovieActivity.class);
+                    intent.putExtra("id", movie.id);
+                    intent.putExtra("media_type", movie.media_type);
+                    context.startActivity(intent);
+                } else {
+                    TVItem tv = (TVItem) entertainment;
+                    Intent intent = new Intent(context, DetailsTVActivity.class);
+                    intent.putExtra("id", tv.id);
+                    intent.putExtra("media_type", tv.media_type);
+                    context.startActivity(intent);
+                }
             }
         });
     }
@@ -50,18 +73,13 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView trending;
-//        private TextView textTrending;
+        private TextView txtTitleItem;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             trending = itemView.findViewById(R.id.trendingImage);
-//            textTrending = itemView.findViewById(R.id.textTrending);
+            txtTitleItem = itemView.findViewById(R.id.txtTitleItem);
         }
-    }
-
-    public TrendingMovieAdapter(List<Entertainment> list, Listener listener) {
-        this.list = list;
-        this.listener = listener;
     }
 
     public interface Listener {
