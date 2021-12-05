@@ -45,7 +45,7 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
     }
 
     private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count,  String overview) {
-        imageView = findViewById(R.id.imgBackroundDetail);
+        imageView = findViewById(R.id.imgBackgroundDetail);
         ImageAPI.getCorner(imageBg, 5, imageView);
 
         imageView = findViewById(R.id.imgDetail);

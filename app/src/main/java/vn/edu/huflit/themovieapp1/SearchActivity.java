@@ -10,22 +10,51 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
-public class SearchActivity extends AppCompatActivity {
-    RecyclerView rvSearchFilter;
-    Toolbar toolbar;
-    SearchView searchView;
+import static java.security.AccessController.getContext;
+
+public class SearchActivity extends AppCompatActivity implements Serializable, SearchAdapter.Listener {
+    private RecyclerView rvSearchFilter;
+    private Toolbar toolbar;
+    private SearchView searchView;
+
+    MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        renderTrendingMovie();
+
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         searchView = toolbar.findViewById(R.id.searchView);
 
         rvSearchFilter = findViewById(R.id.rvSearchFilter);
+//        if (getIntent().hasExtra("id") && getIntent().hasExtra("media_type")) {
+//            String id = getIntent().getStringExtra("id");
+//
+//            List<Entertainment> listTrending = api.getTrending();
+//
+//
+//        }
+
+    }
+    public void renderTrendingMovie(){
+        List<Entertainment> list = api.getTrending();
+        RecyclerView listView = findViewById(R.id.rvSearchFilter);
+        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getApplicationContext() ,list, (TrendingMovieAdapter.Listener) this);
+        LinearLayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        listView.setLayoutManager(layout);
+        listView.setAdapter(adapter);
+    }
+
+    @Override
+    public void onClick(Entertainment item) {
+
     }
 }

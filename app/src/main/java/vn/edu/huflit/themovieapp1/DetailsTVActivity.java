@@ -48,7 +48,7 @@ public class DetailsTVActivity extends AppCompatActivity implements Serializable
     }
 
     private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count, Integer number_of_session, Integer number_of_episodes, String overview) {
-        imageView = findViewById(R.id.imgBackroundDetail);
+        imageView = findViewById(R.id.imgBackgroundDetail);
         ImageAPI.getCorner(imageBg, 5, imageView);
 
         imageView = findViewById(R.id.imgDetail);

@@ -25,5 +25,4 @@
             android:name=".SearchActivity"
             android:theme="@style/Theme.TheMovieApp2"/>
     </application>
-
 </manifest>

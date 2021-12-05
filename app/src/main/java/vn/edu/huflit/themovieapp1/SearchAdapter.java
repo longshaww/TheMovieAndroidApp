@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdapter.ViewHolder> {
+public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder> {
     private List<Entertainment> list;
     private Listener listener;
     private Context context;
 
-    public TrendingMovieAdapter(Context context, List<Entertainment> list, Listener listener) {
+    public SearchAdapter(Context context, List<Entertainment> list, Listener listener) {
         this.list = list;
         this.listener = listener;
         this.context = context;
@@ -27,7 +27,7 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_movie_image, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.list_search, parent, false);
         return new ViewHolder(view);
     }
 
@@ -36,10 +36,10 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
         Entertainment entertainment = list.get(position);
         if (entertainment.media_type.equals("movie")) {
             MovieItem movie = (MovieItem) entertainment;
-            holder.txtTitleItem.setText(movie.title);
+            holder.txtNameItemSearch.setText(movie.title);
         } else {
             TVItem tv = (TVItem) entertainment;
-            holder.txtTitleItem.setText(tv.name);
+            holder.txtNameItemSearch.setText(tv.name);
         }
         ImageAPI.getCorner(entertainment.poster_path, 3, holder.trending);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
@@ -70,12 +70,12 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView trending;
-        private TextView txtTitleItem;
+        private TextView txtNameItemSearch;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            trending = itemView.findViewById(R.id.trendingImage);
-            txtTitleItem = itemView.findViewById(R.id.txtTitleItem);
+            trending = itemView.findViewById(R.id.imgItemSearch);
+            txtNameItemSearch = itemView.findViewById(R.id.txtTitleItem);
         }
     }
 
