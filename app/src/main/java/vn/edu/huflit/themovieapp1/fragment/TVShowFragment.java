@@ -1,7 +1,11 @@
 package vn.edu.huflit.themovieapp1.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -20,6 +24,7 @@ import vn.edu.huflit.themovieapp1.ImageAPI;
 import vn.edu.huflit.themovieapp1.MovieAPI;
 import vn.edu.huflit.themovieapp1.MovieItem;
 import vn.edu.huflit.themovieapp1.R;
+import vn.edu.huflit.themovieapp1.SearchActivity;
 import vn.edu.huflit.themovieapp1.TVAdapter;
 import vn.edu.huflit.themovieapp1.TVItem;
 
@@ -28,6 +33,13 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
     private ImageView trendingSingleImage,secondSingleImage , thirdSingleImage;
     private TextView trendingSingleTitle,secondSingleTitle,thirdSingleTitle;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setHasOptionsMenu(true);
+    }
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -79,6 +91,21 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         LinearLayoutManager layoutTV = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listTVView.setLayoutManager(layoutTV);
         listTVView.setAdapter(tvAdapter);
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_search, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == R.id.menuSearch) {
+            Intent intent = new Intent(getContext(), SearchActivity.class);
+            startActivity(intent);
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

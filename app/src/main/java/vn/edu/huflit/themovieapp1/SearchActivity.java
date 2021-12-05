@@ -31,7 +31,6 @@ public class SearchActivity extends AppCompatActivity implements Serializable, S
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         searchView = toolbar.findViewById(R.id.searchView);
-
         rvSearchFilter = findViewById(R.id.rvSearchFilter);
 
         renderSearchTrendingMovie();

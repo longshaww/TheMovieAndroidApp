@@ -5,7 +5,7 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import vn.edu.huflit.themovieapp1.fragment.AccountFragment;
+import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
 import vn.edu.huflit.themovieapp1.fragment.HomeFragment;
 import vn.edu.huflit.themovieapp1.fragment.TVShowFragment;
 
@@ -24,7 +24,7 @@ public class ViewPagerAdapter extends FragmentStateAdapter {
             case 1:
                 return new TVShowFragment();
             case 2:
-                return new AccountFragment();
+                return new MyListFragment();
             default:
                 return new HomeFragment();
         }
