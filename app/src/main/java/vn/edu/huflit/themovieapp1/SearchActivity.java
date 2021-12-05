@@ -28,26 +28,19 @@ public class SearchActivity extends AppCompatActivity implements Serializable, S
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        renderTrendingMovie();
-
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         searchView = toolbar.findViewById(R.id.searchView);
 
         rvSearchFilter = findViewById(R.id.rvSearchFilter);
-//        if (getIntent().hasExtra("id") && getIntent().hasExtra("media_type")) {
-//            String id = getIntent().getStringExtra("id");
-//
-//            List<Entertainment> listTrending = api.getTrending();
-//
-//
-//        }
 
+        renderSearchTrendingMovie();
     }
-    public void renderTrendingMovie(){
+
+    public void renderSearchTrendingMovie() {
         List<Entertainment> list = api.getTrending();
         RecyclerView listView = findViewById(R.id.rvSearchFilter);
-        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getApplicationContext() ,list, (TrendingMovieAdapter.Listener) this);
+        SearchAdapter adapter = new SearchAdapter(getApplicationContext(), list, this);
         LinearLayoutManager layout = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(layout);
         listView.setAdapter(adapter);

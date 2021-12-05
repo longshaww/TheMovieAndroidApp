@@ -41,7 +41,7 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
             TVItem tv = (TVItem) entertainment;
             holder.txtNameItemSearch.setText(tv.name);
         }
-        ImageAPI.getCorner(entertainment.poster_path, 3, holder.trending);
+        ImageAPI.getCorner(entertainment.backdrop_path, 3, holder.imgItemSearch);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -69,13 +69,13 @@ public class SearchAdapter extends RecyclerView.Adapter<SearchAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        private ImageView trending;
+        private ImageView imgItemSearch;
         private TextView txtNameItemSearch;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            trending = itemView.findViewById(R.id.imgItemSearch);
-            txtNameItemSearch = itemView.findViewById(R.id.txtTitleItem);
+            imgItemSearch = itemView.findViewById(R.id.imgItemSearch);
+            txtNameItemSearch = itemView.findViewById(R.id.txtNameItemSearch);
         }
     }
 

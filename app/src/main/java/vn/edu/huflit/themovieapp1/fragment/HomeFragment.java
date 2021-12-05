@@ -26,7 +26,6 @@ import vn.edu.huflit.themovieapp1.MovieAPI;
 import vn.edu.huflit.themovieapp1.MovieAdapter;
 import vn.edu.huflit.themovieapp1.MovieItem;
 import vn.edu.huflit.themovieapp1.R;
-//import vn.edu.huflit.themovieapp1.SearchActivity;
 import vn.edu.huflit.themovieapp1.SearchActivity;
 import vn.edu.huflit.themovieapp1.TrendingMovieAdapter;
 
