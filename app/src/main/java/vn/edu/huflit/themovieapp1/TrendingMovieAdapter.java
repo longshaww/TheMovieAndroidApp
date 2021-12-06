@@ -17,18 +17,25 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
     private List<Entertainment> list;
     private Listener listener;
     private Context context;
+    private Boolean bool;
 
-    public TrendingMovieAdapter(Context context, List<Entertainment> list, Listener listener) {
+    public TrendingMovieAdapter(Context context, List<Entertainment> list, Listener listener, Boolean bool) {
         this.list = list;
         this.listener = listener;
         this.context = context;
+        this.bool = bool;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_movie_image, parent, false);
-        return new ViewHolder(view);
+        if (this.bool == true) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.backdrop_layout, parent, false);
+            return new ViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_movie_image, parent, false);
+            return new ViewHolder(view);
+        }
     }
 
     @Override
@@ -41,7 +48,11 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
             TVItem tv = (TVItem) entertainment;
             holder.txtTitleItem.setText(tv.name);
         }
-        ImageAPI.getCorner(entertainment.poster_path, 3, holder.trending);
+        if (this.bool == true) {
+            ImageAPI.getCorner(entertainment.backdrop_path, 5, holder.trending);
+        } else {
+            ImageAPI.getCorner(entertainment.poster_path, 3, holder.trending);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

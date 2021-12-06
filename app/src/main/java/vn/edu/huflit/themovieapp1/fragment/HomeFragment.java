@@ -21,7 +21,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.List;
 
 import vn.edu.huflit.themovieapp1.Entertainment;
-import vn.edu.huflit.themovieapp1.ImageAPI;
 import vn.edu.huflit.themovieapp1.MovieAPI;
 import vn.edu.huflit.themovieapp1.MovieAdapter;
 import vn.edu.huflit.themovieapp1.MovieItem;
@@ -52,21 +51,21 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         renderTrendingMovie();
         renderPopularMovie();
         renderTopRatedMovie();
-        renderPopularMovieSingleComponent();
+        renderUpComingMovie();
         return mView;
     }
-    public void renderPopularMovieSingleComponent(){
-        List<MovieItem> list = api.getPopularMovie();
-        MovieItem movie = list.get(0);
-        trendingSingleImage = mView.findViewById(R.id.TrendingSingleImage);
-        trendingSingleTitle = mView.findViewById(R.id.TrendingSingleTitle);
-        ImageAPI.getCorner(movie.backdrop_path, 5, trendingSingleImage);
-        trendingSingleTitle.setText(movie.title);
+    public void renderUpComingMovie(){
+        List<MovieItem> listMovie = api.getUpcoming();
+        RecyclerView listMovieView = mView.findViewById(R.id.UpComing);
+        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this,true);
+        LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        listMovieView.setLayoutManager(layoutMovie);
+        listMovieView.setAdapter(movieAdapter);
     }
     public void renderTrendingMovie() {
         List<Entertainment> list = api.getTrending();
         RecyclerView listView = mView.findViewById(R.id.TrendingList);
-        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getContext(), list, this);
+        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getContext(), list, this,false);
         LinearLayoutManager layout = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listView.setLayoutManager(layout);
         listView.setAdapter(adapter);
@@ -74,7 +73,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
     public void renderPopularMovie(){
         List<MovieItem> listMovie = api.getPopularMovie();
         RecyclerView listMovieView = mView.findViewById(R.id.PopularTV);
-        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this);
+        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this,false);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
@@ -83,7 +82,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
     public void renderTopRatedMovie(){
         List<MovieItem> listMovie = api.getTopRatedMovie();
         RecyclerView listMovieView = mView.findViewById(R.id.TopRatedMovie);
-        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this);
+        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this,false);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);

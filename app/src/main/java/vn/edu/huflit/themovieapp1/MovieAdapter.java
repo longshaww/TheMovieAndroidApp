@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintSet;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
@@ -17,25 +18,37 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private List<MovieItem> list;
     private Listener listener;
     private Context context;
+    private Boolean bool;
+    private ConstraintSet.Layout layout;
 
-    public MovieAdapter(Context context, List<MovieItem> list, MovieAdapter.Listener listener) {
+    public MovieAdapter(Context context, List<MovieItem> list, MovieAdapter.Listener listener, Boolean bool) {
         this.context = context;
         this.list = list;
         this.listener = listener;
+        this.bool = bool;
     }
 
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_movie_image, parent, false);
-        return new ViewHolder(view);
+        if (this.bool == true) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.backdrop_layout, parent, false);
+            return new ViewHolder(view);
+        } else {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_movie_image, parent, false);
+            return new ViewHolder(view);
+        }
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         MovieItem movieItem = list.get(position);
         holder.textPopularMovie.setText(movieItem.title);
-        ImageAPI.getCorner(movieItem.poster_path, 3, holder.MovieImage);
+        if (this.bool == true) {
+            ImageAPI.getCorner(movieItem.backdrop_path, 5, holder.MovieImage);
+        } else {
+            ImageAPI.getCorner(movieItem.poster_path, 3, holder.MovieImage);
+        }
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

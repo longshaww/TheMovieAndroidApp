@@ -11,10 +11,13 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class DetailsTVActivity extends AppCompatActivity implements Serializable {
+public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Listener {
     private static final String TAG = "SomeActivity";
     private TextView txtTitle, txtOverview, txtPopularity, txtVoteAverage, txtVoteCount;
     private ImageView imageView;
@@ -26,6 +29,7 @@ public class DetailsTVActivity extends AppCompatActivity implements Serializable
         setContentView(R.layout.activity_detail);
         Log.d(TAG, "onCreate: started");
         getIncomingIntent();
+        renderSimilarTV();
     }
 
     private void getIncomingIntent() {
@@ -45,6 +49,15 @@ public class DetailsTVActivity extends AppCompatActivity implements Serializable
 
             setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, number_of_session, number_of_episodes, overview);
         }
+    }
+    public void renderSimilarTV(){
+        String id = getIntent().getStringExtra("id");
+        List<TVItem> listTV = api.getSimilarTV(id);
+        RecyclerView listTVView = findViewById(R.id.SimilarMovie);
+        TVAdapter tvAdapter = new TVAdapter(this, listTV, this);
+        LinearLayoutManager layoutTV = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        listTVView.setLayoutManager(layoutTV);
+        listTVView.setAdapter(tvAdapter);
     }
 
     private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count, Integer number_of_session, Integer number_of_episodes, String overview) {
@@ -75,6 +88,11 @@ public class DetailsTVActivity extends AppCompatActivity implements Serializable
 
         txtOverview = findViewById(R.id.txtOverviewDetail);
         txtOverview.setText(overview);
+
+    }
+
+    @Override
+    public void onClick(TVItem item) {
 
     }
 }

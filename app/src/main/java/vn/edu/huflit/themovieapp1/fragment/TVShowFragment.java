@@ -20,6 +20,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import vn.edu.huflit.themovieapp1.Entertainment;
 import vn.edu.huflit.themovieapp1.ImageAPI;
 import vn.edu.huflit.themovieapp1.MovieAPI;
 import vn.edu.huflit.themovieapp1.MovieItem;
@@ -27,8 +28,9 @@ import vn.edu.huflit.themovieapp1.R;
 import vn.edu.huflit.themovieapp1.SearchActivity;
 import vn.edu.huflit.themovieapp1.TVAdapter;
 import vn.edu.huflit.themovieapp1.TVItem;
+import vn.edu.huflit.themovieapp1.TrendingMovieAdapter;
 
-public class TVShowFragment extends Fragment implements TVAdapter.Listener {
+public class TVShowFragment extends Fragment implements TVAdapter.Listener, TrendingMovieAdapter.Listener {
     private View mView;
     private ImageView trendingSingleImage,secondSingleImage , thirdSingleImage;
     private TextView trendingSingleTitle,secondSingleTitle,thirdSingleTitle;
@@ -46,34 +48,16 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
         mView = inflater.inflate(R.layout.fragment_tvshow,container,false);
         renderPopularTV();
         renderTopRatedTV();
-        renderPopularTVFirstComponent();
-//        renderPopularTVSecondComponent();
-        renderPopularTVThirdComponent();
+        renderTrendingList();
         return mView;
     }
-    public void renderPopularTVFirstComponent(){
-        List<TVItem> list = api.getPopularTV();
-        TVItem tv = list.get(0);
-        trendingSingleImage = mView.findViewById(R.id.TrendingSingleImage);
-        trendingSingleTitle = mView.findViewById(R.id.TrendingSingleTitle);
-        ImageAPI.getCorner(tv.backdrop_path, 5, trendingSingleImage);
-        trendingSingleTitle.setText(tv.name);
-    }
-//    public void renderPopularTVSecondComponent(){
-//        List<TVItem> list = api.getPopularTV();
-//        TVItem tv = list.get(10);
-//        secondSingleImage = mView.findViewById(R.id.SecondSingleImage);
-//        secondSingleTitle = mView.findViewById(R.id.SecondSingleTitle);
-//        ImageAPI.getCorner(tv.backdrop_path, 5, secondSingleImage);
-//        secondSingleTitle.setText(tv.name);
-//    }
-    public void renderPopularTVThirdComponent(){
-        List<TVItem> list = api.getPopularTV();
-        TVItem tv = list.get(20);
-        thirdSingleImage = mView.findViewById(R.id.ThirdSingleImage);
-        thirdSingleTitle = mView.findViewById(R.id.ThirdSingleTitle);
-        ImageAPI.getCorner(tv.backdrop_path, 5, thirdSingleImage);
-        thirdSingleTitle.setText(tv.name);
+    public void renderTrendingList(){
+        List<Entertainment> list = api.getTrending();
+        RecyclerView listView = mView.findViewById(R.id.Trending);
+        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getContext(), list, this,true);
+        LinearLayoutManager layout = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
+        listView.setLayoutManager(layout);
+        listView.setAdapter(adapter);
     }
 
     public void renderPopularTV(){
@@ -111,5 +95,10 @@ public class TVShowFragment extends Fragment implements TVAdapter.Listener {
     @Override
     public void onClick(TVItem item) {
         Toast.makeText(getContext(), item.id, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onClick(Entertainment item) {
+
     }
 }

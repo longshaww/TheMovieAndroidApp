@@ -1,18 +1,19 @@
 package vn.edu.huflit.themovieapp1;
 
-import android.graphics.Movie;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.util.List;
 
-public class DetailsMovieActivity extends AppCompatActivity implements Serializable{
+public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener {
     private static final String TAG ="SomeActivity";
     private TextView txtTitle,txtOverview,txtPopularity,txtVoteAverage,txtVoteCount;
     private ImageView imageView;
@@ -24,13 +25,12 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         setContentView(R.layout.activity_detail);
         Log.d(TAG, "onCreate: started");
         getIncomingIntent();
+        renderSimilarMovie();
     }
 
     private void getIncomingIntent() {
         if (getIntent().hasExtra("id") && getIntent().hasExtra("media_type")) {
             String id = getIntent().getStringExtra("id");
-            String media_type = getIntent().getStringExtra("media_type");
-
             MovieDetail movieDetail = api.getDetailMovie(id);
             String imageBg = movieDetail.backdrop_path;
             String image = movieDetail.poster_path;
@@ -42,6 +42,16 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
 
             setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, overview);
         }
+    }
+
+    public void renderSimilarMovie(){
+        String id = getIntent().getStringExtra("id");
+        List<MovieItem> similarMovie = api.getSimilarMovie(id);
+        RecyclerView listMovieView = findViewById(R.id.SimilarMovie);
+        MovieAdapter movieAdapter = new MovieAdapter(this,similarMovie,this,false);
+        LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        listMovieView.setLayoutManager(layoutMovie);
+        listMovieView.setAdapter(movieAdapter);
     }
 
     private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count,  String overview) {
@@ -66,6 +76,11 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
 
         txtOverview = findViewById(R.id.txtOverviewDetail);
         txtOverview.setText(overview);
+
+    }
+
+    @Override
+    public void onClick(MovieItem item) {
 
     }
 }
