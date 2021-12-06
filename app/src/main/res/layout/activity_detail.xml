@@ -93,7 +93,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="2dp"
-            android:drawableStart="@drawable/ic_baseline_bookmarks_24"
+            android:drawableStart="@drawable/ic_baseline_favorite_24"
             android:textSize="14dp"
             app:layout_constraintEnd_toStartOf="@+id/txtNumVoteCount"
             app:layout_constraintTop_toTopOf="@+id/txtNumVoteCount" />
@@ -149,6 +149,19 @@
             app:layout_constraintTop_toBottomOf="@+id/txtNumVoteCount" />
 
         <TextView
+            android:id="@+id/textView4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="-2dp"
+            android:background="@drawable/border_style"
+            android:drawableStart="@drawable/ic_baseline_playlist_add_24"
+            android:gravity="center"
+            android:text="AddList"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/txtTitleDetail"
+            app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
+
+        <TextView
             android:id="@+id/txtTitleOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -169,34 +182,10 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="12dp"
-            android:paddingBottom="16dp"
             android:textColor="#000000"
             android:textSize="16dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtTitleOverview" />
-
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="-2dp"
-            android:background="@drawable/border_style"
-            android:drawableStart="@drawable/ic_baseline_playlist_add_24"
-            android:gravity="center"
-            android:text="AddList"
-            android:textSize="12dp"
-            app:layout_constraintEnd_toEndOf="@+id/txtTitleDetail"
-            app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/SimilarMovie"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="12dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
 
         <TextView
             android:id="@+id/textView8"
@@ -210,6 +199,20 @@
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtOverviewDetail" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/SimilarMovie"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="12dp"
+            android:paddingBottom="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>
