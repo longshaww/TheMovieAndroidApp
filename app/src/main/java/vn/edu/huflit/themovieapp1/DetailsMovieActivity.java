@@ -2,8 +2,10 @@ package vn.edu.huflit.themovieapp1;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.ImageView;
 import android.widget.TextView;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
     private static final String TAG ="SomeActivity";
     private TextView txtTitle,txtOverview,txtPopularity,txtVoteAverage,txtVoteCount;
     private ImageView imageView;
+    private Toolbar toolbar;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
 
     @Override
@@ -26,6 +29,19 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         Log.d(TAG, "onCreate: started");
         getIncomingIntent();
         renderSimilarMovie();
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     private void getIncomingIntent() {

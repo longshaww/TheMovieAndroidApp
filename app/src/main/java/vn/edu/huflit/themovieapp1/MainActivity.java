@@ -7,12 +7,18 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.os.Bundle;
+import android.text.Html;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import androidx.appcompat.widget.Toolbar;
+import androidx.appcompat.app.ActionBar;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
@@ -24,11 +30,23 @@ import vn.edu.huflit.themovieapp1.R;
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private BottomNavigationView bottomNavigationView;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        toolbar.setLogo(R.drawable.logo_icon);
+
+//        ActionBar actionBar = getSupportActionBar();
+//        actionBar.setLogo(R.layout.logo_toolbar);
+//        actionBar.setDisplayShowCustomEnabled(true);
+//        LayoutInflater inflater = (LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+//        View view = inflater.inflate(R.layout.logo_toolbar, null);
+//        actionBar.setCustomView(view);
 
         // APIKEY is a key create in https://www.themoviedb.org/
 //        MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");

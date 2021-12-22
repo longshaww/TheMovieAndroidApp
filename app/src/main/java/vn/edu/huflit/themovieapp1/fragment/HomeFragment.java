@@ -14,6 +14,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.ActionBar;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -52,6 +54,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         renderPopularMovie();
         renderTopRatedMovie();
         renderUpComingMovie();
+
         return mView;
     }
     public void renderUpComingMovie(){
@@ -90,6 +93,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_search, menu);
     }
@@ -112,5 +116,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
     public void onClick(MovieItem item) {
         Toast.makeText(getContext(), item.id, Toast.LENGTH_SHORT).show();
     }
+
+
 
 }
