@@ -160,16 +160,16 @@
             app:layout_constraintEnd_toEndOf="@+id/txtNumVoteCount"
             app:layout_constraintTop_toBottomOf="@+id/txtNumVoteCount" />
 
-        <TextView
-            android:id="@+id/textView4"
+        <Button
+            android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-2dp"
-            android:background="@drawable/border_style"
-            android:drawableStart="@drawable/ic_baseline_playlist_add_24"
+             android:drawableLeft="@drawable/ic_baseline_playlist_add_24"
             android:gravity="center"
             android:text="AddList"
             android:textSize="12dp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/txtTitleDetail"
             app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
 
