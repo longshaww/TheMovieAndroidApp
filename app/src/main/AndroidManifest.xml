@@ -7,14 +7,17 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon_app"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/icon_app"
         android:supportsRtl="true"
         android:theme="@style/Theme.TheMovieApp2">
-        <activity android:name=".MainActivity"/>
-        <activity android:name=".DetailsMovieActivity" />
-        <activity android:name=".DetailsTVActivity" />
+        <activity android:name=".MainActivity"
+            android:label=""/>
+        <activity android:name=".DetailsMovieActivity"
+            android:label=""/>
+        <activity android:name=".DetailsTVActivity"
+            android:label=""/>
         <activity
             android:name=".WelcomeActivity">
             <intent-filter>
@@ -24,6 +27,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".SearchActivity" />
+            android:name=".SearchActivity"
+            android:label=""/>
     </application>
 </manifest>

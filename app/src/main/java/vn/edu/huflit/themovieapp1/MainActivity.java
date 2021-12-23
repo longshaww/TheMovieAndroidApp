@@ -9,6 +9,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.Html;
 import android.util.Log;
@@ -17,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.ActionBar;
 
@@ -30,7 +33,8 @@ import vn.edu.huflit.themovieapp1.R;
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;
     private BottomNavigationView bottomNavigationView;
-    Toolbar toolbar;
+    private Toolbar toolbar;
+    private TextView txtLogo, txtLogo1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,7 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        toolbar.setLogo(R.drawable.logo_icon);
+
+        Typeface typeface = Typeface.createFromAsset(getAssets(), "font/Anton-Regular.ttf");
+        txtLogo = findViewById(R.id.txtLogo);
+        txtLogo1 = findViewById(R.id.txtLogo1);
+        txtLogo.setTypeface(typeface, Typeface.BOLD_ITALIC);
+        txtLogo1.setTypeface(typeface, Typeface.BOLD_ITALIC);
+
+//        toolbar.setLogo(R.drawable.neko_icon);
 
 //        ActionBar actionBar = getSupportActionBar();
 //        actionBar.setLogo(R.layout.logo_toolbar);
