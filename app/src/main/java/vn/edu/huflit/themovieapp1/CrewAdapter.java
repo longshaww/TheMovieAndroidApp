@@ -13,12 +13,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
-    private List<Cast> list;
+public class CrewAdapter extends RecyclerView.Adapter<CrewAdapter.ViewHolder> {
+    private List<Crew> list;
     private Listener listener;
     private Context context;
 
-    public CastAdapter(Context context, List<Cast> list, Listener listener, boolean b) {
+    public CrewAdapter(Context context, List<Crew> list, Listener listener, boolean b) {
         this.context = context;
         this.list = list;
         this.listener = listener;
@@ -26,21 +26,21 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
 
     @NonNull
     @Override
-    public CastAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public CrewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.collection_cast, parent, false);
-        return new CastAdapter.ViewHolder(view);
+        return new CrewAdapter.ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Cast castList = list.get(position);
-        holder.txtNameCast_Crew.setText(castList.name);
-        holder.txtCharacter_Department.setText(castList.character);
-        ImageAPI.getCircle(castList.profile_path, 3, holder.imgCast_Crew);
+        Crew crewList = list.get(position);
+        holder.txtNameCast_Crew.setText(crewList.name);
+        holder.txtCharacter_Department.setText(crewList.department);
+        ImageAPI.getCircle(crewList.profile_path, 3, holder.imgCast_Crew);
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onClick(castList);
+                listener.onClick(crewList);
 //                Intent intent = new Intent(context, DetailsTVActivity.class);
 //                intent.putExtra("id", tvList.id);
 //                intent.putExtra("media_type", tvList.credit_id);
@@ -67,6 +67,7 @@ public class CastAdapter extends RecyclerView.Adapter<CastAdapter.ViewHolder> {
     }
 
     public interface Listener {
-        void onClick(Cast item);
+        void onClick(Crew item);
     }
 }
+

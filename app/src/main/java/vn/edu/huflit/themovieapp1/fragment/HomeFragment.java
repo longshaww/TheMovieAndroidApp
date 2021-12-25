@@ -117,6 +117,4 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         Toast.makeText(getContext(), item.id, Toast.LENGTH_SHORT).show();
     }
 
-
-
 }

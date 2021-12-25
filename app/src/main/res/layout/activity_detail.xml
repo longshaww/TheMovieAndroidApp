@@ -160,16 +160,16 @@
             app:layout_constraintEnd_toEndOf="@+id/txtNumVoteCount"
             app:layout_constraintTop_toBottomOf="@+id/txtNumVoteCount" />
 
-        <TextView
-            android:id="@+id/textView4"
+        <Button
+            android:id="@+id/addButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="-2dp"
-            android:background="@drawable/border_style"
-            android:drawableStart="@drawable/ic_baseline_playlist_add_24"
+            android:drawableLeft="@drawable/ic_baseline_playlist_add_24"
             android:gravity="center"
             android:text="AddList"
             android:textSize="12dp"
+            android:textColor="@color/black"
             app:layout_constraintEnd_toEndOf="@+id/txtTitleDetail"
             app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
 
@@ -222,6 +222,29 @@
             app:layout_constraintTop_toBottomOf="@+id/txtCast" />
 
         <TextView
+            android:id="@+id/txtCrew"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Crew"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/rvCastMovie" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCrewMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCrew" />
+
+        <TextView
             android:id="@+id/txtSimilar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -232,7 +255,7 @@
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/rvCastMovie" />
+            app:layout_constraintTop_toBottomOf="@+id/rvCrewMovie" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SimilarMovie"

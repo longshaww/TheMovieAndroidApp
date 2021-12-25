@@ -3,8 +3,12 @@
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
 import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.Nullable;
@@ -13,11 +17,14 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener {
+public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener, CrewAdapter.Listener {
+    private List<String> favouriteList = new ArrayList<>();
     private static final String TAG ="SomeActivity";
     private TextView txtTitle,txtOverview,txtPopularity,txtVoteAverage,txtVoteCount;
+    private Button addButton;
     private ImageView imageView;
     private Toolbar toolbar;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
@@ -30,6 +37,7 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         getIncomingIntent();
         renderSimilarMovie();
         renderCastMovie();
+        renderCrewMovie();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -58,7 +66,7 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
             Integer vote_count = movieDetail.vote_count;
             String overview = movieDetail.overview;
 
-            setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, overview);
+            setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, overview , id);
         }
     }
 
@@ -87,14 +95,14 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         String id = getIntent().getStringExtra("id");
         Object[] creditMovie = api.getCredit(id, true);
         List<Crew> crewMovie = (List<Crew>) creditMovie[1];
-        RecyclerView listMovieView = findViewById(R.id.rvCastMovie);
-        CastAdapter castAdapter = new CastAdapter(this,castMovie,this,false);
+        RecyclerView listMovieView = findViewById(R.id.rvCrewMovie);
+        CrewAdapter crewAdapter = new CrewAdapter(this,crewMovie,this,false);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
-        listMovieView.setAdapter(castAdapter);
+        listMovieView.setAdapter(crewAdapter);
     }
 
-    private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count,  String overview) {
+    private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count,  String overview , String id) {
         imageView = findViewById(R.id.imgBackgroundDetail);
         ImageAPI.getCorner(imageBg, 5, imageView);
 
@@ -116,7 +124,16 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
 
         txtOverview = findViewById(R.id.txtOverviewDetail);
         txtOverview.setText(overview);
-
+        
+        addButton = findViewById(R.id.addButton);
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(DetailsMovieActivity.this, id, Toast.LENGTH_SHORT).show();
+                favouriteList.add(id);
+                System.out.println("List" + favouriteList);
+            }
+        });
     }
 
     @Override
@@ -126,6 +143,11 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
 
     @Override
     public void onClick(Cast item) {
+
+    }
+
+    @Override
+    public void onClick(Crew item) {
 
     }
 }

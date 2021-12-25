@@ -19,7 +19,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
     private Listener listener;
     private Context context;
     private Boolean bool;
-    private ConstraintSet.Layout layout;
 
     public MovieAdapter(Context context, List<MovieItem> list, MovieAdapter.Listener listener, Boolean bool) {
         this.context = context;

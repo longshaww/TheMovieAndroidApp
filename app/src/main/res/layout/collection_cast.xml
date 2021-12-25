@@ -7,7 +7,7 @@
     android:layout_marginRight="12dp">
 
     <ImageView
-        android:id="@+id/imgCast"
+        android:id="@+id/imgCast_Crew"
         android:layout_width="104dp"
         android:layout_height="104dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -15,7 +15,7 @@
         tools:srcCompat="@tools:sample/avatars" />
 
     <TextView
-        android:id="@+id/txtNameCast"
+        android:id="@+id/txtNameCast_Crew"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -26,12 +26,12 @@
         android:paddingEnd="3dp"
         android:textColor="#000000"
         android:textSize="16dp"
-        app:layout_constraintEnd_toEndOf="@+id/imgCast"
-        app:layout_constraintStart_toStartOf="@+id/imgCast"
-        app:layout_constraintTop_toBottomOf="@+id/imgCast" />
+        app:layout_constraintEnd_toEndOf="@+id/imgCast_Crew"
+        app:layout_constraintStart_toStartOf="@+id/imgCast_Crew"
+        app:layout_constraintTop_toBottomOf="@+id/imgCast_Crew" />
 
     <TextView
-        android:id="@+id/txtCharacter"
+        android:id="@+id/txtCharacter_Department"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="4dp"
@@ -41,7 +41,7 @@
         android:paddingStart="9dp"
         android:paddingEnd="3dp"
         android:textSize="12dp"
-        app:layout_constraintEnd_toEndOf="@+id/imgCast"
-        app:layout_constraintStart_toStartOf="@+id/imgCast"
-        app:layout_constraintTop_toBottomOf="@+id/txtNameCast" />
+        app:layout_constraintEnd_toEndOf="@+id/imgCast_Crew"
+        app:layout_constraintStart_toStartOf="@+id/imgCast_Crew"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameCast_Crew" />
 </androidx.constraintlayout.widget.ConstraintLayout>
