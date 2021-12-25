@@ -20,7 +20,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Listener, CastAdapter.Listener {
+public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Listener, CastAdapter.Listener, CrewAdapter.Listener {
     private static final String TAG = "SomeActivity";
     private TextView txtTitle, txtOverview, txtPopularity, txtVoteAverage, txtVoteCount;
     private ImageView imageView;
@@ -35,6 +35,7 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
         getIncomingIntent();
         renderSimilarTV();
         renderCastTV();
+        renderCrewMovie();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -90,6 +91,17 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
         listMovieView.setAdapter(castAdapter);
     }
 
+    public void renderCrewMovie(){
+        String id = getIntent().getStringExtra("id");
+        Object[] creditMovie = api.getCredit(id, true);
+        List<Crew> crewMovie = (List<Crew>) creditMovie[1];
+        RecyclerView listMovieView = findViewById(R.id.rvCrewMovie);
+        CrewAdapter crewAdapter = new CrewAdapter(this,crewMovie, this,false);
+        LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        listMovieView.setLayoutManager(layoutMovie);
+        listMovieView.setAdapter(crewAdapter);
+    }
+
     private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count, Integer number_of_session, Integer number_of_episodes, String overview) {
         imageView = findViewById(R.id.imgBackgroundDetail);
         ImageAPI.getCorner(imageBg, 5, imageView);
@@ -128,6 +140,11 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
 
     @Override
     public void onClick(Cast item) {
+
+    }
+
+    @Override
+    public void onClick(Crew item) {
 
     }
 }
