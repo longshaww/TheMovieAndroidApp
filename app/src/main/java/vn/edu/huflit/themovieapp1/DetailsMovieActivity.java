@@ -1,4 +1,4 @@
-package vn.edu.huflit.themovieapp1;
+ package vn.edu.huflit.themovieapp1;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.Serializable;
 import java.util.List;
 
-public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener {
+public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener {
     private static final String TAG ="SomeActivity";
     private TextView txtTitle,txtOverview,txtPopularity,txtVoteAverage,txtVoteCount;
     private ImageView imageView;
@@ -29,6 +29,7 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         Log.d(TAG, "onCreate: started");
         getIncomingIntent();
         renderSimilarMovie();
+        renderCastMovie();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -47,6 +48,7 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
     private void getIncomingIntent() {
         if (getIntent().hasExtra("id") && getIntent().hasExtra("media_type")) {
             String id = getIntent().getStringExtra("id");
+
             MovieDetail movieDetail = api.getDetailMovie(id);
             String imageBg = movieDetail.backdrop_path;
             String image = movieDetail.poster_path;
@@ -68,6 +70,28 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
+    }
+
+    public void renderCastMovie(){
+        String id = getIntent().getStringExtra("id");
+        Object[] creditMovie = api.getCredit(id, true);
+        List<Cast> castMovie = (List<Cast>) creditMovie[0];
+        RecyclerView listMovieView = findViewById(R.id.rvCastMovie);
+        CastAdapter castAdapter = new CastAdapter(this,castMovie,this,false);
+        LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        listMovieView.setLayoutManager(layoutMovie);
+        listMovieView.setAdapter(castAdapter);
+    }
+
+    public void renderCrewMovie(){
+        String id = getIntent().getStringExtra("id");
+        Object[] creditMovie = api.getCredit(id, true);
+        List<Crew> crewMovie = (List<Crew>) creditMovie[1];
+        RecyclerView listMovieView = findViewById(R.id.rvCastMovie);
+        CastAdapter castAdapter = new CastAdapter(this,castMovie,this,false);
+        LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        listMovieView.setLayoutManager(layoutMovie);
+        listMovieView.setAdapter(castAdapter);
     }
 
     private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count,  String overview) {
@@ -97,6 +121,11 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
 
     @Override
     public void onClick(MovieItem item) {
+
+    }
+
+    @Override
+    public void onClick(Cast item) {
 
     }
 }

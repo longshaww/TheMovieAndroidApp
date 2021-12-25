@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_marginRight="12dp">
+
+    <ImageView
+        android:id="@+id/imgCast"
+        android:layout_width="104dp"
+        android:layout_height="104dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:srcCompat="@tools:sample/avatars" />
+
+    <TextView
+        android:id="@+id/txtNameCast"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:maxLines="1"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingStart="9dp"
+        android:paddingEnd="3dp"
+        android:textColor="#000000"
+        android:textSize="16dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgCast"
+        app:layout_constraintStart_toStartOf="@+id/imgCast"
+        app:layout_constraintTop_toBottomOf="@+id/imgCast" />
+
+    <TextView
+        android:id="@+id/txtCharacter"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:gravity="center"
+        android:ellipsize="end"
+        android:maxLines="1"
+        android:paddingStart="9dp"
+        android:paddingEnd="3dp"
+        android:textSize="12dp"
+        app:layout_constraintEnd_toEndOf="@+id/imgCast"
+        app:layout_constraintStart_toStartOf="@+id/imgCast"
+        app:layout_constraintTop_toBottomOf="@+id/txtNameCast" />
+</androidx.constraintlayout.widget.ConstraintLayout>

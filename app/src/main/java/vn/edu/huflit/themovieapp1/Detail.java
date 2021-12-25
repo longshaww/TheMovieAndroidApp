@@ -97,6 +97,7 @@ class MovieDetail extends Detail {
 }
 
 class TVDetail extends Detail {
+    public static Object Season;
     @SerializedName("created_by")
     public Person[] created_by;
     @SerializedName("episode_run_time")

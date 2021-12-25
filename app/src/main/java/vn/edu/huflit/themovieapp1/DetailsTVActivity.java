@@ -17,9 +17,10 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
-public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Listener {
+public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Listener, CastAdapter.Listener {
     private static final String TAG = "SomeActivity";
     private TextView txtTitle, txtOverview, txtPopularity, txtVoteAverage, txtVoteCount;
     private ImageView imageView;
@@ -33,6 +34,7 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
         Log.d(TAG, "onCreate: started");
         getIncomingIntent();
         renderSimilarTV();
+        renderCastTV();
 
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -66,6 +68,7 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
             setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, number_of_session, number_of_episodes, overview);
         }
     }
+
     public void renderSimilarTV(){
         String id = getIntent().getStringExtra("id");
         List<TVItem> listTV = api.getSimilarTV(id);
@@ -74,6 +77,17 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
         LinearLayoutManager layoutTV = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         listTVView.setLayoutManager(layoutTV);
         listTVView.setAdapter(tvAdapter);
+    }
+
+    public void renderCastTV(){
+        String id = getIntent().getStringExtra("id");
+        Object[] creditTV = api.getCredit(id, false);
+        List<Cast> castTV = (List<Cast>) creditTV[0];
+        RecyclerView listMovieView = findViewById(R.id.rvCastMovie);
+        CastAdapter castAdapter = new CastAdapter(this, castTV,this,false);
+        LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
+        listMovieView.setLayoutManager(layoutMovie);
+        listMovieView.setAdapter(castAdapter);
     }
 
     private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count, Integer number_of_session, Integer number_of_episodes, String overview) {
@@ -109,6 +123,11 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
 
     @Override
     public void onClick(TVItem item) {
+
+    }
+
+    @Override
+    public void onClick(Cast item) {
 
     }
 }

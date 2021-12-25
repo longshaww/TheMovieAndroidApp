@@ -187,7 +187,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtSession" />
 
-
         <TextView
             android:id="@+id/txtOverviewDetail"
             android:layout_width="match_parent"
@@ -200,7 +199,30 @@
             app:layout_constraintTop_toBottomOf="@+id/txtTitleOverview" />
 
         <TextView
-            android:id="@+id/textView8"
+            android:id="@+id/txtCast"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:text="Cast"
+            android:textColor="#000000"
+            android:textSize="18dp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtOverviewDetail" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rvCastMovie"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="12dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtCast" />
+
+        <TextView
+            android:id="@+id/txtSimilar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
@@ -210,19 +232,18 @@
             android:textSize="18dp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtOverviewDetail" />
+            app:layout_constraintTop_toBottomOf="@+id/rvCastMovie" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/SimilarMovie"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
             android:layout_marginTop="12dp"
             android:paddingBottom="20dp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/textView8" />
+            app:layout_constraintTop_toBottomOf="@+id/txtSimilar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>
