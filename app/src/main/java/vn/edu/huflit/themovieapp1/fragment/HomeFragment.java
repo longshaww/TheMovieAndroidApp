@@ -57,6 +57,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
 
         return mView;
     }
+
     public void renderUpComingMovie(){
         List<MovieItem> listMovie = api.getUpcoming();
         RecyclerView listMovieView = mView.findViewById(R.id.UpComing);
@@ -65,6 +66,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
     }
+
     public void renderTrendingMovie() {
         List<Entertainment> list = api.getTrending();
         RecyclerView listView = mView.findViewById(R.id.TrendingList);
@@ -73,6 +75,7 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         listView.setLayoutManager(layout);
         listView.setAdapter(adapter);
     }
+
     public void renderPopularMovie(){
         List<MovieItem> listMovie = api.getPopularMovie();
         RecyclerView listMovieView = mView.findViewById(R.id.PopularTV);

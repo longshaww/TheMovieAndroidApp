@@ -93,7 +93,7 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
 
     public void renderCrewMovie(){
         String id = getIntent().getStringExtra("id");
-        Object[] creditMovie = api.getCredit(id, true);
+        Object[] creditMovie = api.getCredit(id, false);
         List<Crew> crewMovie = (List<Crew>) creditMovie[1];
         RecyclerView listMovieView = findViewById(R.id.rvCrewMovie);
         CrewAdapter crewAdapter = new CrewAdapter(this,crewMovie, this,false);

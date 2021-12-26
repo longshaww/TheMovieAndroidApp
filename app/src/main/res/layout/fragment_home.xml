@@ -25,10 +25,20 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txtBg"
+        android:layout_width="8dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="@+id/txtTrending"
+        app:layout_constraintEnd_toStartOf="@+id/txtTrending"
+        app:layout_constraintTop_toTopOf="@+id/txtTrending" />
+
+    <TextView
+        android:id="@+id/txtTrending"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="Trending"
         android:textColor="#000000"
         android:textSize="20dp"
@@ -44,14 +54,24 @@
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTrending" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txtBg1"
+        android:layout_width="8dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="@+id/txtPopular"
+        app:layout_constraintEnd_toStartOf="@+id/txtPopular"
+        app:layout_constraintTop_toTopOf="@+id/txtPopular" />
+
+    <TextView
+        android:id="@+id/txtPopular"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="Popular Movie"
         android:textColor="#000000"
         android:textSize="20dp"
@@ -67,14 +87,24 @@
         android:layout_marginStart="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+        app:layout_constraintTop_toBottomOf="@+id/txtPopular" />
 
     <TextView
-        android:id="@+id/textView5"
+        android:id="@+id/txtBg2"
+        android:layout_width="8dp"
+        android:layout_height="24dp"
+        android:layout_marginEnd="4dp"
+        android:background="@drawable/background"
+        app:layout_constraintBottom_toBottomOf="@+id/txtRate"
+        app:layout_constraintEnd_toStartOf="@+id/txtRate"
+        app:layout_constraintTop_toTopOf="@+id/txtRate" />
+
+    <TextView
+        android:id="@+id/txtRate"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="16dp"
         android:text="Top Rated Movies"
         android:textColor="#000000"
         android:textSize="20dp"
@@ -91,7 +121,7 @@
         android:paddingBottom="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView5" />
+        app:layout_constraintTop_toBottomOf="@+id/txtRate" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -174,12 +174,21 @@
             app:layout_constraintTop_toBottomOf="@+id/imgDetail" />
 
         <TextView
+            android:id="@+id/txtBg22"
+            android:layout_width="8dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/background"
+            app:layout_constraintBottom_toBottomOf="@+id/txtTitleOverview"
+            app:layout_constraintEnd_toStartOf="@+id/txtTitleOverview"
+            app:layout_constraintTop_toTopOf="@+id/txtTitleOverview" />
+
+        <TextView
             android:id="@+id/txtTitleOverview"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
-            android:layout_marginBottom="8dp"
             android:text="Overview"
             android:textColor="#000000"
             android:textSize="18dp"
@@ -199,10 +208,20 @@
             app:layout_constraintTop_toBottomOf="@+id/txtTitleOverview" />
 
         <TextView
+            android:id="@+id/txtBg23"
+            android:layout_width="8dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/background"
+            app:layout_constraintBottom_toBottomOf="@+id/txtCast"
+            app:layout_constraintEnd_toStartOf="@+id/txtCast"
+            app:layout_constraintTop_toTopOf="@+id/txtCast" />
+
+        <TextView
             android:id="@+id/txtCast"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Cast"
             android:textColor="#000000"
@@ -222,10 +241,20 @@
             app:layout_constraintTop_toBottomOf="@+id/txtCast" />
 
         <TextView
+            android:id="@+id/txtBg24"
+            android:layout_width="8dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/background"
+            app:layout_constraintBottom_toBottomOf="@+id/txtCrew"
+            app:layout_constraintEnd_toStartOf="@+id/txtCrew"
+            app:layout_constraintTop_toTopOf="@+id/txtCrew" />
+
+        <TextView
             android:id="@+id/txtCrew"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Crew"
             android:textColor="#000000"
@@ -245,10 +274,20 @@
             app:layout_constraintTop_toBottomOf="@+id/txtCrew" />
 
         <TextView
+            android:id="@+id/txtBg25"
+            android:layout_width="8dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="4dp"
+            android:background="@drawable/background"
+            app:layout_constraintBottom_toBottomOf="@+id/txtSimilar"
+            app:layout_constraintEnd_toStartOf="@+id/txtSimilar"
+            app:layout_constraintTop_toTopOf="@+id/txtSimilar" />
+
+        <TextView
             android:id="@+id/txtSimilar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="16dp"
+            android:layout_marginStart="24dp"
             android:layout_marginTop="24dp"
             android:text="Similar Movie/TV"
             android:textColor="#000000"
