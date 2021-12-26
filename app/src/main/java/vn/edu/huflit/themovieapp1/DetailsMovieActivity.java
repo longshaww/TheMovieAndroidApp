@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -20,14 +21,21 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener, CrewAdapter.Listener {
-    private List<String> favouriteList = new ArrayList<>();
+import vn.edu.huflit.themovieapp1.fragment.FavouriteAdapter;
+import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
+
+ public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener, CrewAdapter.Listener {
     private static final String TAG ="SomeActivity";
     private TextView txtTitle,txtOverview,txtPopularity,txtVoteAverage,txtVoteCount;
     private Button addButton;
     private ImageView imageView;
     private Toolbar toolbar;
-    MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
+
+//     public static MyListFragment crud;
+//     public static ListView LvFavourite;
+//     public static ArrayList<Favourite> favourites;
+
+     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +77,15 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
             setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, overview , id);
         }
     }
+
+//    public Favourite getFavourite(String id, String image , String title){
+//        Favourite favourite = new Favourite();
+//        favourite.setId(id);
+//        favourite.setPoster_path(image);
+//        favourite.setTitle(title);
+//        return favourite;
+//    }
+
 
     public void renderSimilarMovie(){
         String id = getIntent().getStringExtra("id");
@@ -115,7 +132,6 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         txtPopularity = findViewById(R.id.txtNumPopularity);
         txtPopularity.setText(popularity.toString());
 
-
         txtVoteAverage = findViewById(R.id.txtNumVoteAverage);
         txtVoteAverage.setText(vote_average.toString());
 
@@ -126,13 +142,17 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         txtOverview.setText(overview);
         
         addButton = findViewById(R.id.addButton);
+
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(DetailsMovieActivity.this, id, Toast.LENGTH_SHORT).show();
-                favouriteList.add(id);
-                System.out.println("List" + favouriteList);
+                // Using intend
+//                crud.AddData(view,id,image,name);
+//                if (favourites != null) {
+//                    LvFavourite.setAdapter(new FavouriteAdapter(getBaseContext().getApplicationContext()));
+//                }
             }
+
         });
     }
 
