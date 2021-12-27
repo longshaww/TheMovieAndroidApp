@@ -1,15 +1,12 @@
- package vn.edu.huflit.themovieapp1;
+package vn.edu.huflit.themovieapp1;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 
@@ -19,24 +16,16 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-import vn.edu.huflit.themovieapp1.fragment.FavouriteAdapter;
-import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
-
- public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener, CrewAdapter.Listener {
-    private static final String TAG ="SomeActivity";
-    private TextView txtTitle,txtOverview,txtPopularity,txtVoteAverage,txtVoteCount;
+public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener, CrewAdapter.Listener {
+    private static final String TAG = "SomeActivity";
+    private TextView txtTitle, txtOverview, txtPopularity, txtVoteAverage, txtVoteCount;
     private Button addButton;
     private ImageView imageView;
     private Toolbar toolbar;
 
-     public static MyListFragment crud;
-     public static ListView LvFavourite;
-     public static ArrayList<Favourite> favourites;
-
-     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
+    MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -63,10 +52,9 @@ import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
     }
 
     private void getIncomingIntent() {
-        if (getIntent().hasExtra("id") && getIntent().hasExtra("media_type")) {
             String id = getIntent().getStringExtra("id");
-
             MovieDetail movieDetail = api.getDetailMovie(id);
+
             String imageBg = movieDetail.backdrop_path;
             String image = movieDetail.poster_path;
             String name = movieDetail.title;
@@ -75,52 +63,47 @@ import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
             Integer vote_count = movieDetail.vote_count;
             String overview = movieDetail.overview;
 
-            setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, overview , id);
-        }
+            setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, overview, id);
+
     }
 
-//    public Favourite getFavourite(String id, String image , String title){
-//        Favourite favourite = new Favourite();
-//        favourite.setId(id);
-//        favourite.setPoster_path(image);
-//        favourite.setTitle(title);
-//        return favourite;
-//    }
 
-
-    public void renderSimilarMovie(){
+    public void renderSimilarMovie() {
         String id = getIntent().getStringExtra("id");
         List<MovieItem> similarMovie = api.getSimilarMovie(id);
         RecyclerView listMovieView = findViewById(R.id.SimilarMovie);
-        MovieAdapter movieAdapter = new MovieAdapter(this,similarMovie,this,false);
+        MovieAdapter movieAdapter = new MovieAdapter(this, similarMovie, this, false);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
     }
 
-    public void renderCastMovie(){
+    public void renderCastMovie() {
         String id = getIntent().getStringExtra("id");
         Object[] creditMovie = api.getCredit(id, true);
         List<Cast> castMovie = (List<Cast>) creditMovie[0];
         RecyclerView listMovieView = findViewById(R.id.rvCastMovie);
-        CastAdapter castAdapter = new CastAdapter(this,castMovie,this,false);
+        CastAdapter castAdapter = new CastAdapter(this, castMovie, this, false);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(castAdapter);
     }
 
-    public void renderCrewMovie(){
+    public void renderCrewMovie() {
         String id = getIntent().getStringExtra("id");
         Object[] creditMovie = api.getCredit(id, true);
         List<Crew> crewMovie = (List<Crew>) creditMovie[1];
         RecyclerView listMovieView = findViewById(R.id.rvCrewMovie);
-        CrewAdapter crewAdapter = new CrewAdapter(this,crewMovie,this,false);
+        CrewAdapter crewAdapter = new CrewAdapter(this, crewMovie, this, false);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(crewAdapter);
     }
 
-    private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count,  String overview , String id) {
+
+    private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count, String overview, String id) {
+        String type = "movie";
+
         imageView = findViewById(R.id.imgBackgroundDetail);
         ImageAPI.getCorner(imageBg, 5, imageView);
 
@@ -141,20 +124,15 @@ import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
 
         txtOverview = findViewById(R.id.txtOverviewDetail);
         txtOverview.setText(overview);
-        
+
         addButton = findViewById(R.id.addButton);
 
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(DetailsMovieActivity.this, MyListFragment.class);
-                intent.putExtra("id", id);
-                intent.putExtra("title",name);
-                intent.putExtra("poster", image);
-                startActivity(intent);
+                FavouriteHelper favouriteHelper = new FavouriteHelper(getBaseContext());
+                favouriteHelper.insertFavorites(id, name, type , overview, image, vote_average);
             }
-
-
         });
     }
 

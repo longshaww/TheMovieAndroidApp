@@ -1,39 +1,113 @@
 package vn.edu.huflit.themovieapp1;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-public class FavouriteHelper extends SQLiteOpenHelper {
+import java.util.ArrayList;
+import java.util.List;
 
-    private static final String DATABASE_NAME="FavouriteMovies.db";
-    public static final String TABLE_NAME_FAVOURITE ="Favourtie";
+public class FavouriteHelper{
 
-    public static final String ID_COLUMN = "id";
-    public static final String POSTER_PATH_COLUMN = "poster_path";
-    public static final String TITLE_COLUMN = "title";
+    Context context;
+    String dbName = "Favorite.db";
 
-    private static final String CREATE_TABLE_FAVOURITE = ""
-            + "create table " + TABLE_NAME_FAVOURITE + " ( "
-            + ID_COLUMN + " integer primary key ,"
-            + POSTER_PATH_COLUMN + " text not null, "
-            + TITLE_COLUMN + " text not null );";
-
-    public FavouriteHelper(@Nullable Context context){
-        super(context,DATABASE_NAME,null,1);
+    public FavouriteHelper(Context context){
+        this.context = context;
+        CreateTable();
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        db.execSQL(CREATE_TABLE_FAVOURITE);
+    private SQLiteDatabase openDB() {
+        return context.openOrCreateDatabase(dbName, Context.MODE_PRIVATE, null);
     }
 
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+    private void closeDB(SQLiteDatabase db) {
+        db.close();
+    }
 
-        
+    private void CreateTable() {
+        SQLiteDatabase db = openDB();
 
+        String sqlFavorites = "CREATE TABLE IF NOT EXISTS tblFavorites(" +
+                "ID TEXT NOT NULL PRIMARY KEY," +
+                "Type TEXT," +
+                "Name TEXT," +
+                "Poster TEXT," +
+                "Description TEXT, "+
+                "Vote REAL);";
+        db.execSQL(sqlFavorites);
+        closeDB(db);
+    }
+
+    public List<Entertainment> getAllFavorites() {
+        SQLiteDatabase db = openDB();
+        ArrayList<Entertainment> arr = new ArrayList<>();
+        String sql = "select * from tblFavorites";
+        Cursor csr = db.rawQuery(sql, null);
+
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    String id = csr.getString(0);
+                    String type = csr.getString(1);
+                    String name = csr.getString(2);
+                    String poster_path = csr.getString(3);
+                    String description = csr.getString(4);
+                    double vote = csr.getDouble(5);
+
+                    System.out.println(type);
+                    arr.add(type.equals("movie") ? new MovieItem(id, type, name, poster_path, description, vote) : new TVItem(id, type, name, poster_path, description, vote));
+                } while (csr.moveToNext());
+            }
+        }
+        closeDB(db);
+        return arr;
+    }
+    public List<MovieItem> getAllMovies() {
+        SQLiteDatabase db = openDB();
+        ArrayList<MovieItem> arr = new ArrayList<>();
+        String sql = "select * from tblFavorites";
+        Cursor csr = db.rawQuery(sql, null);
+
+        if (csr != null) {
+            if (csr.moveToFirst()) {
+                do {
+                    String id = csr.getString(0);
+                    String type = csr.getString(1);
+                    String name = csr.getString(2);
+                    String poster_path = csr.getString(3);
+                    String description = csr.getString(4);
+                    double vote = csr.getDouble(5);
+
+                    System.out.println(type);
+                    arr.add(new MovieItem(id, type, name, poster_path, description, vote));
+                } while (csr.moveToNext());
+            }
+        }
+        closeDB(db);
+        return arr;
+    }
+
+    public void insertFavorites(String id, String title, String type, String overview, String poster_path, double vote_average) {
+        ContentValues contentValues = new ContentValues();
+        contentValues.put("ID", id);
+        contentValues.put("Name", title);
+        contentValues.put("Type", type);
+        contentValues.put("Description", overview);
+        contentValues.put("Poster", poster_path);
+        contentValues.put("Vote", vote_average);
+        SQLiteDatabase db = openDB();
+        db.insert("tblFavorites", null, contentValues);
+        closeDB(db);
+    }
+
+    public void deleteRow(String id)
+    {
+        SQLiteDatabase db = openDB();
+        db.delete("tblFavorites",  "ID="  + id, null);
     }
 }

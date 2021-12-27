@@ -7,6 +7,7 @@ import android.os.PersistableBundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
@@ -25,6 +26,7 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
     private TextView txtTitle, txtOverview, txtPopularity, txtVoteAverage, txtVoteCount;
     private ImageView imageView;
     private Toolbar toolbar;
+    private Button addButton;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
 
     @Override
@@ -52,7 +54,6 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
     }
 
     private void getIncomingIntent() {
-        if (getIntent().hasExtra("id") && getIntent().hasExtra("media_type")) {
             String id = getIntent().getStringExtra("id");
 
             TVDetail tvDetail = api.getDetailTV(id);
@@ -66,8 +67,7 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
             Integer number_of_episodes = tvDetail.number_of_episodes;
             String overview = tvDetail.overview;
 
-            setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, number_of_session, number_of_episodes, overview);
-        }
+            setIncomingIntent(imageBg, image, name, popularity, vote_average, vote_count, number_of_session, number_of_episodes, overview,id);
     }
 
     public void renderSimilarTV(){
@@ -102,7 +102,8 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
         listMovieView.setAdapter(crewAdapter);
     }
 
-    private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count, Integer number_of_session, Integer number_of_episodes, String overview) {
+    private void setIncomingIntent(String imageBg, String image, String name, Double popularity, Double vote_average, Integer vote_count, Integer number_of_session, Integer number_of_episodes, String overview,String id) {
+        String type = "tv";
         imageView = findViewById(R.id.imgBackgroundDetail);
         ImageAPI.getCorner(imageBg, 5, imageView);
 
@@ -130,7 +131,15 @@ public class DetailsTVActivity extends AppCompatActivity implements TVAdapter.Li
 
         txtOverview = findViewById(R.id.txtOverviewDetail);
         txtOverview.setText(overview);
+        addButton = findViewById(R.id.addButton);
 
+        addButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                FavouriteHelper favouriteHelper = new FavouriteHelper(getBaseContext());
+                favouriteHelper.insertFavorites(id, name, type , overview, image, vote_average);
+            }
+        });
     }
 
     @Override

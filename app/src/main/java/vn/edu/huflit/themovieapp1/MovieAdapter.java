@@ -54,7 +54,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
                 listener.onClick(movieItem);
                 Intent intent = new Intent(context, DetailsMovieActivity.class);
                 intent.putExtra("id", movieItem.id);
-                intent.putExtra("media_type", movieItem.media_type);
+                intent.putExtra("type", movieItem.media_type);
                 context.startActivity(intent);
             }
         });
@@ -75,7 +75,6 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
             textPopularMovie = itemView.findViewById(R.id.txtTitleItem);
         }
     }
-
 
     public interface Listener {
         void onClick(MovieItem item);
