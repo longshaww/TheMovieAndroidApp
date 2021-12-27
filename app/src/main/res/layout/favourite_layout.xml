@@ -38,4 +38,5 @@
         app:layout_constraintStart_toStartOf="@+id/favourite_poster"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/ic_baseline_delete_24" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

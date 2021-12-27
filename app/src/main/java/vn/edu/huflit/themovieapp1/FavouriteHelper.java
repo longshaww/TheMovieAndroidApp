@@ -8,7 +8,7 @@ import androidx.annotation.Nullable;
 
 public class FavouriteHelper extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME="FavouriteMovies";
+    private static final String DATABASE_NAME="FavouriteMovies.db";
     public static final String TABLE_NAME_FAVOURITE ="Favourtie";
 
     public static final String ID_COLUMN = "id";

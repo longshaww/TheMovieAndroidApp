@@ -1,5 +1,6 @@
  package vn.edu.huflit.themovieapp1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -31,9 +32,9 @@ import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
     private ImageView imageView;
     private Toolbar toolbar;
 
-//     public static MyListFragment crud;
-//     public static ListView LvFavourite;
-//     public static ArrayList<Favourite> favourites;
+     public static MyListFragment crud;
+     public static ListView LvFavourite;
+     public static ArrayList<Favourite> favourites;
 
      MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
 
@@ -146,12 +147,13 @@ import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                // Using intend
-//                crud.AddData(view,id,image,name);
-//                if (favourites != null) {
-//                    LvFavourite.setAdapter(new FavouriteAdapter(getBaseContext().getApplicationContext()));
-//                }
+                Intent intent = new Intent(DetailsMovieActivity.this, MyListFragment.class);
+                intent.putExtra("id", id);
+                intent.putExtra("title",name);
+                intent.putExtra("poster", image);
+                startActivity(intent);
             }
+
 
         });
     }

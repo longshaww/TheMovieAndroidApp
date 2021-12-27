@@ -9,13 +9,15 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import vn.edu.huflit.themovieapp1.ImageAPI;
 import vn.edu.huflit.themovieapp1.MainActivity;
 import vn.edu.huflit.themovieapp1.R;
 
 public class FavouriteAdapter extends BaseAdapter {
 
     LayoutInflater inflater;
-    TextView title, poster;
+    TextView title;
+    ImageView poster;
     Context context;
 
     public FavouriteAdapter(Context context) {
@@ -49,7 +51,8 @@ public class FavouriteAdapter extends BaseAdapter {
         title.setText(MyListFragment.favourites.get(position).getTitle());
 
         poster = view.findViewById(R.id.favourite_poster);
-        poster.setText(MyListFragment.favourites.get(position).getPoster_path());
+//        ImageAPI.getCorner(MyListFragment.get(position), 3, holder.MovieImage);
+        poster.setImageResource(Integer.parseInt(MyListFragment.favourites.get(position).getPoster_path()));
 
         ((ImageView) view.findViewById(R.id.detele)).setOnClickListener(new View.OnClickListener() {
             @Override

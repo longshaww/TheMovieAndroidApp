@@ -53,7 +53,6 @@ public class MyListFragment extends Fragment {
 
     // Ô nhập liệu
 //    private EditText favourite_txt, favourite_poster;
-    private String title, poster;
     private static String id = "-1";
 
     Button btnSave;
@@ -87,17 +86,17 @@ public class MyListFragment extends Fragment {
         });
 
         // call Add button
-//        btnSave = mView.findViewById(R.id.addButton);
-//        btnSave.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AddData(view);
-//                Toast.makeText(getContext().getApplicationContext(), "Inserted", Toast.LENGTH_SHORT).show();
-//                if (favourites != null) {
-//                    LvFavourite.setAdapter(new FavouriteAdapter(getContext().getApplicationContext()));
-//                }
-//            }
-//        });
+        btnSave = mView.findViewById(R.id.loadData);
+        btnSave.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AddData(view);
+                Toast.makeText(getContext().getApplicationContext(), "Inserted", Toast.LENGTH_SHORT).show();
+                if (favourites != null) {
+                    LvFavourite.setAdapter(new FavouriteAdapter(getContext().getApplicationContext()));
+                }
+            }
+        });
         return mView;
     }
 
@@ -130,33 +129,37 @@ public class MyListFragment extends Fragment {
             }
         }
     }
-//    public Favourite getFavourite(String id,String poster,String title){
-//        Favourite favourite1 = new Favourite();
-//        favourite1.setId(id);
-//        favourite1.setPoster_path(poster);
-//        favourite1.setTitle(title);
-//    }
+
+    public Favourite getFavourite() {
+        String id = getActivity().getIntent().getStringExtra("id");
+        String title = getActivity().getIntent().getStringExtra("title");
+        String poster = getActivity().getIntent().getStringExtra("poster");
+
+        Favourite favourite = new Favourite();
+        favourite.setId(Integer.parseInt(id));
+        favourite.setPoster_path(poster);
+        favourite.setTitle(title);
+        return favourite;
+    }
 
 
-    public void AddData(View view ,String id , String poster , String title) {
-        Favourite favourite1 = new Favourite();
-        favourite1.setId(Integer.parseInt(id));
-        favourite1.setPoster_path(poster);
-        favourite1.setTitle(title);
+    public void AddData(View view) {
+        Favourite favourite1 = getFavourite();
+
         if (favourites == null) {
             favourites = new ArrayList<Favourite>();
         }
         if (favourite1 != null) {
-            if (database.Add(favourite1) != -1) {
-                favourites.add(favourite1);
-                updateData();
-                // Cập nhật lại danh sách
-                LvFavourite.invalidateViews();
+            database.Add(favourite1);
+            favourites.add(favourite1);
+            updateData();
+            // Cập nhật lại danh sách
+            LvFavourite.invalidateViews();
 //                txtName.setText(null);
 //                txtClass.setText(null);
 //                txtChampion.setText(null);
 //                id = -1;
-            }
+
         }
     }
 

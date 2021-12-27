@@ -9,23 +9,24 @@ public class FavouriteCrud {
     SQLiteDatabase database;
     FavouriteHelper helper;
 
-    public FavouriteCrud(Context context){
+    public FavouriteCrud(Context context) {
         helper = new FavouriteHelper(context);
         database = helper.getWritableDatabase();
     }
 
-    public Cursor getAllData(){
-        String [] column = {
+    public Cursor getAllData() {
+        String[] column = {
                 FavouriteHelper.ID_COLUMN,
                 FavouriteHelper.POSTER_PATH_COLUMN,
                 FavouriteHelper.TITLE_COLUMN,
         };
         Cursor cursor = null;
         cursor = database.query(FavouriteHelper.TABLE_NAME_FAVOURITE
-                        , column, null, null, null, null,
+                , column, null, null, null, null,
                 FavouriteHelper.ID_COLUMN + " DESC");
         return cursor;
     }
+
     public long Add(Favourite favourite) {
         ContentValues values = new ContentValues();
         values.put(FavouriteHelper.ID_COLUMN,
