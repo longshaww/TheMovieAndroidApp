@@ -7,37 +7,31 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
-
-public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdapter.ViewHolder> {
+public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.ViewHolder> {
     private List<Entertainment> list;
     private Listener listener;
     private Context context;
-    private Boolean bool;
+    private FavouriteHelper helper;
 
-    public TrendingMovieAdapter(Context context, List<Entertainment> list, Listener listener, Boolean bool) {
+    public FavouriteAdapter(Context context, List<Entertainment> list, Listener listener) {
         this.list = list;
         this.listener = listener;
         this.context = context;
-        this.bool = bool;
+        helper = new FavouriteHelper(context);
     }
 
     @NonNull
     @Override
-    public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        if (this.bool == true) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.backdrop_layout, parent, false);
-            return new ViewHolder(view);
-        } else {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.trending_movie_image, parent, false);
-            return new ViewHolder(view);
-        }
+    public FavouriteAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.favourite_layout, parent, false);
+        return new FavouriteAdapter.ViewHolder(view);
     }
 
     @Override
@@ -50,12 +44,9 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
             TVItem tv = (TVItem) entertainment;
             holder.txtTitleItem.setText(tv.name);
         }
-        if (this.bool == true) {
-            ImageAPI.getCorner(entertainment.backdrop_path, 5, holder.trending);
-        } else {
-            ImageAPI.getCorner(entertainment.poster_path, 3, holder.trending);
-        }
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
+        ImageAPI.getCorner(entertainment.poster_path, 3, holder.trending);
+
+        holder.trending.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 listener.onClick(entertainment);
@@ -74,6 +65,14 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
                 }
             }
         });
+        holder.delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    helper.deleteRow(entertainment.id);
+                    list = helper.getAllFavorites();
+                    notifyDataSetChanged();
+            }
+        });
     }
 
     @Override
@@ -84,11 +83,14 @@ public class TrendingMovieAdapter extends RecyclerView.Adapter<TrendingMovieAdap
     public class ViewHolder extends RecyclerView.ViewHolder {
         private ImageView trending;
         private TextView txtTitleItem;
+        private ImageView delete;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            trending = itemView.findViewById(R.id.trendingImage);
-            txtTitleItem = itemView.findViewById(R.id.txtTitleItem);
+            trending = itemView.findViewById(R.id.favourite_poster);
+            txtTitleItem = itemView.findViewById(R.id.favourite_txt);
+            delete = itemView.findViewById(R.id.deleteFav);
+
         }
     }
 

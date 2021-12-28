@@ -21,6 +21,7 @@ public class FavouriteHelper{
         CreateTable();
     }
 
+
     private SQLiteDatabase openDB() {
         return context.openOrCreateDatabase(dbName, Context.MODE_PRIVATE, null);
     }

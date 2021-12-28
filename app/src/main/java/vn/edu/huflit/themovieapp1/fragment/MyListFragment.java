@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import vn.edu.huflit.themovieapp1.Entertainment;
+import vn.edu.huflit.themovieapp1.FavouriteAdapter;
 import vn.edu.huflit.themovieapp1.FavouriteHelper;
 import vn.edu.huflit.themovieapp1.MovieAPI;
 import vn.edu.huflit.themovieapp1.MovieAdapter;
@@ -25,7 +26,7 @@ import vn.edu.huflit.themovieapp1.SearchAdapter;
 import vn.edu.huflit.themovieapp1.TrendingMovieAdapter;
 
 
-public class MyListFragment extends Fragment implements MovieAdapter.Listener,TrendingMovieAdapter.Listener{
+public class MyListFragment extends Fragment implements FavouriteAdapter.Listener{
     private View mView;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
     @Nullable
@@ -36,23 +37,20 @@ public class MyListFragment extends Fragment implements MovieAdapter.Listener,Tr
         return mView;
     }
 
+
     public void renderFavouriteList() {
         FavouriteHelper favouriteHelper = new FavouriteHelper(getContext());
         List<Entertainment> list = favouriteHelper.getAllFavorites();
         RecyclerView listView = mView.findViewById(R.id.favouriteView);
-        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getContext(), list, this,false);
+        FavouriteAdapter adapter = new FavouriteAdapter(getContext(), list, this);
         LinearLayoutManager layout = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(layout);
         listView.setAdapter(adapter);
     }
 
     @Override
-    public void onClick(MovieItem item) {
-
-    }
-
-    @Override
     public void onClick(Entertainment item) {
 
     }
+
 }
