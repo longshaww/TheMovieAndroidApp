@@ -12,6 +12,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.ViewHolder> {
@@ -90,7 +91,6 @@ public class FavouriteAdapter extends RecyclerView.Adapter<FavouriteAdapter.View
             trending = itemView.findViewById(R.id.favourite_poster);
             txtTitleItem = itemView.findViewById(R.id.favourite_txt);
             delete = itemView.findViewById(R.id.deleteFav);
-
         }
     }
 

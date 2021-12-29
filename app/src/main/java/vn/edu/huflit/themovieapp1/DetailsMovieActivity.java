@@ -18,10 +18,12 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.io.Serializable;
 import java.util.List;
 
-public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener, CrewAdapter.Listener {
+import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
+
+public class DetailsMovieActivity extends AppCompatActivity implements Serializable, MovieAdapter.Listener, CastAdapter.Listener, CrewAdapter.Listener ,FavouriteAdapter.Listener{
     private static final String TAG = "SomeActivity";
     private TextView txtTitle, txtOverview, txtPopularity, txtVoteAverage, txtVoteCount;
-    private Button addButton;
+    public static Button addButton;
     private ImageView imageView;
     private Toolbar toolbar;
 
@@ -125,8 +127,8 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
         txtOverview = findViewById(R.id.txtOverviewDetail);
         txtOverview.setText(overview);
 
-        addButton = findViewById(R.id.addButton);
 
+        addButton = findViewById(R.id.addButton);
         addButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -148,6 +150,11 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
 
     @Override
     public void onClick(Crew item) {
+
+    }
+
+    @Override
+    public void onClick(Entertainment item) {
 
     }
 }

@@ -19,6 +19,7 @@ import android.view.View;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.ActionBar;
@@ -29,6 +30,7 @@ import com.google.android.material.navigation.NavigationBarView;
 import java.util.List;
 
 import vn.edu.huflit.themovieapp1.R;
+import vn.edu.huflit.themovieapp1.fragment.MyListFragment;
 
 public class MainActivity extends AppCompatActivity {
     private ViewPager2 viewPager2;

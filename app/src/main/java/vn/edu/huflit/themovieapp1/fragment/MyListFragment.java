@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -15,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+import vn.edu.huflit.themovieapp1.DetailsMovieActivity;
 import vn.edu.huflit.themovieapp1.Entertainment;
 import vn.edu.huflit.themovieapp1.FavouriteAdapter;
 import vn.edu.huflit.themovieapp1.FavouriteHelper;
@@ -28,25 +30,35 @@ import vn.edu.huflit.themovieapp1.TrendingMovieAdapter;
 
 public class MyListFragment extends Fragment implements FavouriteAdapter.Listener{
     private View mView;
+    private Button refreshBtn;
+    List<Entertainment> list;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fraqment_mylist, container, false);
+        refreshBtn = mView.findViewById(R.id.refreshBtn);
         renderFavouriteList();
+        refreshBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                renderFavouriteList();
+            }
+        });
         return mView;
     }
 
 
     public void renderFavouriteList() {
         FavouriteHelper favouriteHelper = new FavouriteHelper(getContext());
-        List<Entertainment> list = favouriteHelper.getAllFavorites();
+        list = favouriteHelper.getAllFavorites();
         RecyclerView listView = mView.findViewById(R.id.favouriteView);
         FavouriteAdapter adapter = new FavouriteAdapter(getContext(), list, this);
         LinearLayoutManager layout = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(layout);
         listView.setAdapter(adapter);
     }
+
 
     @Override
     public void onClick(Entertainment item) {
