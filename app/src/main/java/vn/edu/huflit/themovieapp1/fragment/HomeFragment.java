@@ -14,8 +14,6 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.ActionBar;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -35,12 +33,14 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
     private View mView;
     private ImageView trendingSingleImage;
     private TextView trendingSingleTitle;
+
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setHasOptionsMenu(true);
+
     }
 
     @Nullable
@@ -55,13 +55,31 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
         renderTopRatedMovie();
         renderUpComingMovie();
 
+//        txtSeeAllTrending = mView.findViewById(R.id.txtSeeAllTrending);
+//        txtSeeAllTrending.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity().getApplication(), SeeAllActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+//
+//        txtSeeAllPopular = mView.findViewById(R.id.txtSeeAllPopular);
+//        txtSeeAllPopular.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent intent = new Intent(getActivity().getApplication(), SeeAllActivity.class);
+//                startActivity(intent);
+//            }
+//        });
+
         return mView;
     }
 
-    public void renderUpComingMovie(){
+    public void renderUpComingMovie() {
         List<MovieItem> listMovie = api.getUpcoming();
         RecyclerView listMovieView = mView.findViewById(R.id.UpComing);
-        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this,true);
+        MovieAdapter movieAdapter = new MovieAdapter(getContext(), listMovie, this, true);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
@@ -70,25 +88,25 @@ public class HomeFragment extends Fragment implements TrendingMovieAdapter.Liste
     public void renderTrendingMovie() {
         List<Entertainment> list = api.getTrending();
         RecyclerView listView = mView.findViewById(R.id.TrendingList);
-        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getContext(), list, this,false);
+        TrendingMovieAdapter adapter = new TrendingMovieAdapter(getContext(), list, this, false);
         LinearLayoutManager layout = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listView.setLayoutManager(layout);
         listView.setAdapter(adapter);
     }
 
-    public void renderPopularMovie(){
+    public void renderPopularMovie() {
         List<MovieItem> listMovie = api.getPopularMovie();
         RecyclerView listMovieView = mView.findViewById(R.id.PopularTV);
-        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this,false);
+        MovieAdapter movieAdapter = new MovieAdapter(getContext(), listMovie, this, false);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
     }
 
-    public void renderTopRatedMovie(){
+    public void renderTopRatedMovie() {
         List<MovieItem> listMovie = api.getTopRatedMovie();
         RecyclerView listMovieView = mView.findViewById(R.id.TopRatedMovie);
-        MovieAdapter movieAdapter = new MovieAdapter(getContext(),listMovie,this,false);
+        MovieAdapter movieAdapter = new MovieAdapter(getContext(), listMovie, this, false);
         LinearLayoutManager layoutMovie = new LinearLayoutManager(this.getContext(), LinearLayoutManager.HORIZONTAL, false);
         listMovieView.setLayoutManager(layoutMovie);
         listMovieView.setAdapter(movieAdapter);
