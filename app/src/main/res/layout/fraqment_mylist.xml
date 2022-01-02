@@ -13,13 +13,16 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent">
+
     <TextView
         android:id="@+id/txtMyList"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:paddingTop="16dp"
-        android:text="My List"
+        android:text="Favorites List"
+        android:fontFamily="sans-serif-black"
+        android:textStyle="italic"
         android:textColor="#000000"
         android:textSize="26dp"
         app:layout_constraintStart_toStartOf="parent"
@@ -39,10 +42,11 @@
         android:id="@+id/refreshBtn"
         android:layout_width="60dp"
         android:layout_height="43dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="40dp"
-        android:drawableLeft="@drawable/ic_baseline_refresh_24"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="16dp"
+        android:drawableTop="@drawable/ic_baseline_refresh_24"
         android:textColor="@color/black"
+        android:backgroundTint="#ea6016"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
