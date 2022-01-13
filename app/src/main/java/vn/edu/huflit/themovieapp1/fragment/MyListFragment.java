@@ -1,5 +1,6 @@
 package vn.edu.huflit.themovieapp1.fragment;
 
+import android.content.Intent;
 import android.graphics.Movie;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -33,12 +34,14 @@ import vn.edu.huflit.themovieapp1.TrendingMovieAdapter;
 public class MyListFragment extends Fragment implements FavouriteAdapter.Listener{
     private View mView;
     private Button refreshBtn;
-    List<Entertainment> list;
     MovieAPI api = new MovieAPI("743a82500e05c3b60a15c2d5030bc55f");
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fraqment_mylist, container, false);
+
+
+
         refreshBtn = mView.findViewById(R.id.refreshBtn);
         renderFavouriteList();
         refreshBtn.setOnClickListener(new View.OnClickListener() {
@@ -55,14 +58,13 @@ public class MyListFragment extends Fragment implements FavouriteAdapter.Listene
 
     public void renderFavouriteList() {
         FavouriteHelper favouriteHelper = new FavouriteHelper(getContext());
-        list = favouriteHelper.getAllFavorites();
+        List<Entertainment> list = favouriteHelper.getAllFavorites();
         RecyclerView listView = mView.findViewById(R.id.favouriteView);
         FavouriteAdapter adapter = new FavouriteAdapter(getContext(), list, this);
         LinearLayoutManager layout = new LinearLayoutManager(this.getContext(), LinearLayoutManager.VERTICAL, false);
         listView.setLayoutManager(layout);
         listView.setAdapter(adapter);
     }
-
 
     @Override
     public void onClick(Entertainment item) {

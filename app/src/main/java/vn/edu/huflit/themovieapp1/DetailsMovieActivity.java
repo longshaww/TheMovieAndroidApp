@@ -1,5 +1,6 @@
 package vn.edu.huflit.themovieapp1;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
@@ -135,7 +136,6 @@ public class DetailsMovieActivity extends AppCompatActivity implements Serializa
             public void onClick(View view) {
                 FavouriteHelper favouriteHelper = new FavouriteHelper(getBaseContext());
                 favouriteHelper.insertFavorites(id, name, type , overview, image, vote_average);
-
                 Toast.makeText(getApplicationContext(), "Added to Favorites", Toast.LENGTH_SHORT).show();
             }
         });
